@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 1289999617}
   - component: {fileID: 1289999616}
   - component: {fileID: 1289999615}
+  - component: {fileID: 1289999619}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -620,6 +621,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1289999619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289999614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce868057c6b88f40b3d2456e597a40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 0.5
+  projectilePrefab: {fileID: 8451299626861950299, guid: c054467200aeca14089e0bb598487897, type: 3}
+  projectileSpeed: 10
+  projectileLifeTime: 3
+  damage: 5
+  targetSearchRadius: 8
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  gameManager: {fileID: 326995743}
+  firePoint: {fileID: 1289999618}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
