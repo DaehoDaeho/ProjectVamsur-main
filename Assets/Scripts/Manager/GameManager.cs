@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 
     public float targetPlayTime;    // 클리어 조건이 될 목표 시간.
 
+    public bool ignorePlayTime = false;
+
     private float elapsedPlayTime;  // 실제로 플레이가 진행된 누적 시간.
 
     private bool isPlaying; // 현재 게임이 진행중인지 여부.
@@ -23,11 +25,14 @@ public class GameManager : MonoBehaviour
     {
         if(currentState == GameState.Playing && isPlaying == true)
         {
-            elapsedPlayTime += Time.deltaTime;
-
-            if(elapsedPlayTime >= targetPlayTime)
+            if(ignorePlayTime == false)
             {
-                HandleGameClear();
+                elapsedPlayTime += Time.deltaTime;
+
+                if (elapsedPlayTime >= targetPlayTime)
+                {
+                    HandleGameClear();
+                }
             }
         }
 

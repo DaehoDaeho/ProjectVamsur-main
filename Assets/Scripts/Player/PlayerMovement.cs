@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 inputDirection;
 
+    private Vector2 knockbackVelocity;
+    public float knockbackDamping = 8.0f;
+
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +44,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 targetVelocity = inputDirection * moveSpeed;
 
-        body.linearVelocity = targetVelocity;
+        if(knockbackVelocity.sqrMagnitude > 0.0001f)
+        {
+            float damp = Mathf.Exp(-knockbackDamping * Time.fixedDeltaTime);
+            knockbackVelocity = knockbackVelocity * damp;
+        }
+        else
+        {
+            knockbackVelocity = Vector2.zero;
+        }
+
+        Vector2 finalVel = targetVelocity + knockbackVelocity;
+        //body.linearVelocity = targetVelocity;
+        body.linearVelocity = finalVel;
     }
 
     public void SetMoveSpeed(float value)
@@ -52,5 +67,10 @@ public class PlayerMovement : MonoBehaviour
     public float GetMoveSpeed()
     {
         return moveSpeed;
+    }
+
+    public void AddKnockback(Vector2 force)
+    {
+        knockbackVelocity += force;
     }
 }
