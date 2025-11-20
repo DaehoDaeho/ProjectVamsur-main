@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public SpriteRenderer spriteRenderer;
     public float hitFlashTime = 0.05f;
 
+    public DropOnDeath drop;
+
     private float currentHealth;
     private float hitFlashTimer;
 
@@ -52,6 +54,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     void Die()
     {
+        if(drop != null)
+        {
+            drop.SpawnDrops();
+        }
+
         Destroy(gameObject);
     }
 

@@ -465,7 +465,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c389684a102901943a39b111ba0a2c02, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -572,6 +572,8 @@ GameObject:
   - component: {fileID: 1289999619}
   - component: {fileID: 1289999620}
   - component: {fileID: 1289999621}
+  - component: {fileID: 1289999623}
+  - component: {fileID: 1289999622}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -781,6 +783,36 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1289999622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289999614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab0984c210b46e44aeee64648740363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetRadius: 4
+  orbLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &1289999623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289999614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36d7618a903f1a4cb37f179c1e6f0bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseExpToLevel: 5
+  growthPerLevel: 2.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
