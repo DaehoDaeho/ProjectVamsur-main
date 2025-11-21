@@ -8,6 +8,7 @@ public class AutoShooter : MonoBehaviour
     public float projectileSpeed = 10.0f;
     public float projectileLifeTime = 3.0f;
     public float damage = 5.0f;
+    public int projectileCount = 1;
 
     public float targetSearchRadius = 8.0f;
     public LayerMask targetLayerMask;
@@ -51,19 +52,26 @@ public class AutoShooter : MonoBehaviour
         Vector3 spawnPos = firePoint.position;
 
         Vector2 dir = GetAimDirection();
-        
-        if(projectilePrefab != null)
+        float baseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        int count = Mathf.Max(1, projectileCount);
+        float spread = 10.0f;
+        float start = baseAngle - spread * (count - 1) * 0.5f;
+
+        for(int i=0; i<count; ++i)
         {
-            GameObject obj = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
+            float angle = start + spread * i;
+            Vector2 shotDir = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            obj.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
-
-            Projectile proj = obj.GetComponent<Projectile>();
-            if(proj != null)
+            if (projectilePrefab != null)
             {
-                proj.SetDirection(dir);
-                proj.Configure(projectileSpeed, projectileLifeTime, damage);
+                GameObject obj = Instantiate(projectilePrefab, spawnPos, Quaternion.Euler(0.0f, 0.0f, angle));
+                Projectile proj = obj.GetComponent<Projectile>();
+                if (proj != null)
+                {
+                    proj.SetDirection(shotDir);
+                    proj.Configure(projectileSpeed, projectileLifeTime, damage);
+                }
             }
         }
     }
@@ -109,5 +117,45 @@ public class AutoShooter : MonoBehaviour
         }
 
         return best;
+    }
+
+    public float GetAttackCooldown()
+    {
+        return attackCooldown;
+    }
+
+    public void SetAttackCooldown(float cooldown)
+    {
+        attackCooldown = cooldown;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+    public void SetDamage(float value)
+    {
+        damage = value;
+    }
+
+    public float GetProjectileSpeed()
+    {
+        return projectileSpeed;
+    }
+
+    public void SetProjectileSpeed(float speed)
+    {
+        projectileSpeed = speed;
+    }
+
+    public int GetProjectileCount()
+    {
+        return projectileCount;
+    }
+
+    public void SetProjectileCount(int count)
+    {
+        projectileCount = count;
     }
 }

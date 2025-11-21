@@ -9,6 +9,9 @@ public class LevelSystem : MonoBehaviour
     [SerializeField]
     private float growthPerLevel = 2.5f;
 
+    [SerializeField]
+    private LevelUpUI levelupUI;
+
     private float currentExp;
     private int currentLevel = 1;
 
@@ -65,6 +68,11 @@ public class LevelSystem : MonoBehaviour
     void OnLevelUp()
     {
         Debug.Log("·¹º§ ¾÷!!! : " + currentLevel);
+
+        if(levelupUI != null)
+        {
+            levelupUI.Open();
+        }
     }
 
     public int GetCurrentLevel()
