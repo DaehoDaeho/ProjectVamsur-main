@@ -22,9 +22,9 @@ public class UpgradeManager : MonoBehaviour
     private UpgradeHistory history;
 
     private Dictionary<UpgradeData, int> levels = new Dictionary<UpgradeData, int>();
-
+        
     [SerializeField]
-    private AutoShooter autoShooter;
+    private WeaponManager weaponManager;
 
     private System.Random rng;
 
@@ -192,40 +192,19 @@ public class UpgradeManager : MonoBehaviour
 
         if(data.effectType == UpgradeData.EffectType.ReduceAttackCooldown)
         {
-            if(autoShooter != null)
-            {
-                float current = autoShooter.GetAttackCooldown();
-                float newValue = Mathf.Max(0.05f, current - value);
-                autoShooter.SetAttackCooldown(newValue);
-            }
+            weaponManager.ReduceCooldownAll(value);
         }
         else if(data.effectType == UpgradeData.EffectType.IncreaseDamage)
         {
-            if (autoShooter != null)
-            {
-                float current = autoShooter.GetDamage();
-                float newValue = current + value;
-                autoShooter.SetDamage(newValue);
-            }
+            weaponManager.AddDamageAll(value);
         }
         else if (data.effectType == UpgradeData.EffectType.IncreaseProjectileSpeed)
         {
-            if (autoShooter != null)
-            {
-                float current = autoShooter.GetProjectileSpeed();
-                float newValue = current + value;
-                autoShooter.SetProjectileSpeed(newValue);
-            }
+            weaponManager.AddProjectileSpeedAll(value);
         }
         else if (data.effectType == UpgradeData.EffectType.IncreaseProjectiles)
         {
-            if (autoShooter != null)
-            {
-                int current = autoShooter.GetProjectileCount();
-                int add = Mathf.RoundToInt(value);
-                int newValue = Mathf.Max(1, current + add);
-                autoShooter.SetProjectileCount(newValue);
-            }
+            weaponManager.AddProjectileCountAll((int)value);
         }
 
         if(history != null)

@@ -23,3 +23,12 @@ MonoBehaviour:
   - 0.05
   - 0.05
   - 0.05
+  rarity: 0
+  tags:
+  - Weapon
+  requiresTags: []
+  excludesTags: []
+  groupId: 
+  requiresLevelMin: 1
+  requiresOwnedWeapon: 0
+  maxPerRun: 99
