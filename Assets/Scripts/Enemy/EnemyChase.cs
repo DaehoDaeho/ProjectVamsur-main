@@ -70,4 +70,9 @@ public class EnemyChase : MonoBehaviour
     {
         moveSpeed = value;
     }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
 }

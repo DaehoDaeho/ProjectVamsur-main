@@ -105,6 +105,17 @@ MonoBehaviour:
   moveSpeed: 10
   lifeTime: 3
   damage: 5
+  canCrit: 0
+  critChance: 0.25
+  critMultiplier: 2
+  knockbackForce: 0
+  applyBurn: 1
+  burnDps: 4
+  burnDuration: 3
+  applyFreeze: 1
+  freezeSlowPercent: 0.4
+  freezeDuration: 2
+  owner: {fileID: 0}
 --- !u!58 &4147348233978342179
 CircleCollider2D:
   m_ObjectHideFlags: 0

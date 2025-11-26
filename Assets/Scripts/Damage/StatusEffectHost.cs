@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// 점화/빙결 상태이상을 관리하는 호스트.
+/// 화상(도트 대미지)/빙결 상태이상을 관리하는 호스트.
 /// - 동일 계열은 더 강한 쪽/더 긴 쪽으로 갱신한다.
 /// - 이동 감속은 외부 이동 로직과 합산될 수 있으니 주의.
 /// </summary>
@@ -43,8 +43,7 @@ public class StatusEffectHost : MonoBehaviour
         }
         if (enemyChase != null)
         {
-            // EnemyChase에 속도 Getter가 없을 수 있으니 직렬화 필드 사용 권장.
-            // 여기서는 반영 단계를 단순화한다.
+            cachedEnemyMove = enemyChase.GetMoveSpeed();
         }
     }
 
@@ -120,7 +119,12 @@ public class StatusEffectHost : MonoBehaviour
             float slowed = baseSpeed * (1.0f - slowPercent);
             playerMovement.SetMoveSpeed(slowed);
         }
-        // EnemyChase의 경우 SetMoveSpeed가 있다면 동일 패턴으로 적용
+        if (enemyChase != null)
+        {
+            float baseSpeed = cachedEnemyMove > 0.0f ? cachedEnemyMove : enemyChase.GetMoveSpeed();
+            float slowed = baseSpeed * (1.0f - slowPercent);
+            enemyChase.SetMoveSpeed(slowed);
+        }
     }
 
     private void ClearSlow()
@@ -129,6 +133,12 @@ public class StatusEffectHost : MonoBehaviour
         {
             float baseSpeed = cachedPlayerMove > 0.0f ? cachedPlayerMove : playerMovement.GetMoveSpeed();
             playerMovement.SetMoveSpeed(baseSpeed);
+        }
+
+        if (enemyChase != null)
+        {
+            float baseSpeed = cachedEnemyMove > 0.0f ? cachedEnemyMove : enemyChase.GetMoveSpeed();
+            enemyChase.SetMoveSpeed(baseSpeed);
         }
         freezeSlowPercent = 0.0f;
     }

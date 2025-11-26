@@ -10,20 +10,18 @@ public class Projectile : MonoBehaviour
 
     private float elapsed;
 
-    //=============================================================
     // 신규: 전투 파라미터
-    private bool canCrit;
-    private float critChance;
-    private float critMultiplier = 2.0f;
-    private float knockbackForce;
-    private bool applyBurn;
-    private float burnDps;
-    private float burnDuration;
-    private bool applyFreeze;
-    private float freezeSlowPercent;
-    private float freezeDuration;
-    private GameObject owner;
-    //=============================================================
+    public bool canCrit;
+    public float critChance;
+    public float critMultiplier = 2.0f;
+    public float knockbackForce;
+    public bool applyBurn;
+    public float burnDps;
+    public float burnDuration;
+    public bool applyFreeze;
+    public float freezeSlowPercent;
+    public float freezeDuration;
+    public GameObject owner;
 
     // Update is called once per frame
     void Update()
@@ -65,7 +63,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        //=============================================================
         // 자기 편 필터 등은 생략(프로젝트 규칙에 맞게 추가 가능)
         // 우선 Router를 찾는다.
         DamageRouter router = collision.GetComponent<DamageRouter>();
@@ -90,7 +87,6 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        //=============================================================
 
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if(damageable != null)
@@ -101,7 +97,6 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //===============================================================
     // --- 신규 Setter들(무기에서 주입) ---
     public void SetOwner(GameObject obj)
     {
@@ -138,5 +133,4 @@ public class Projectile : MonoBehaviour
             freezeDuration = duration;
         }
     }
-    //===============================================================
 }

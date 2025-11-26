@@ -131,6 +131,7 @@ public abstract class WeaponBase : MonoBehaviour
             {
                 proj.SetDirection(dir);
                 proj.Configure(projectileSpeed, projectileLifeTime, damage);
+                proj.SetOwner(gameObject);
             }
         }
     }
