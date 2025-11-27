@@ -15,17 +15,17 @@ public class BossStats : MonoBehaviour
 
     [Header("Immunities")]
     [SerializeField]
-    private bool immuneBurn = false;
+    private bool immuneBurn = false;    // 화상 면역
 
     [SerializeField]
-    private bool immuneFreeze = false;
+    private bool immuneFreeze = false;  // 빙결 면역
 
     [Header("Resistances (0~1)")]
     [SerializeField]
-    private float burnResist = 0.2f;
+    private float burnResist = 0.2f;    // 화상 저항력
 
     [SerializeField]
-    private float freezeResist = 0.2f;
+    private float freezeResist = 0.2f;  // 빙결 저항력
 
     private void Start()
     {
