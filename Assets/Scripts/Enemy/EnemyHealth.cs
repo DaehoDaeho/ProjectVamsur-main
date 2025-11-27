@@ -90,4 +90,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         return currentHealth;
     }
+
+    //=======================================================
+    public void SetCurrentHealth(float newHealth)
+    {
+        currentHealth = newHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+    //=======================================================
 }

@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 5455551349946270254}
   - component: {fileID: 8998877726221401307}
   - component: {fileID: 4779822091999214073}
+  - component: {fileID: 4972501968434894766}
+  - component: {fileID: -2437204951200106759}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -276,3 +278,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
   enemyChase: {fileID: 2893153504507420538}
+--- !u!114 &4972501968434894766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ddef2732ed17d4d9fee9fa666be75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthMultiplier: 3
+  touchDamageMultiplier: 1.5
+  preserveCurrentHealthRatio: 1
+  immuneBurn: 0
+  immuneFreeze: 0
+  rimColor: {r: 1, g: 0.6, b: 0.2, a: 1}
+  rimPowerProperty: _RimPower
+  rimPower: 2.2
+--- !u!114 &-2437204951200106759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654abfa2b5affba48a260c101c894614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  immuneBurn: 0
+  immuneFreeze: 0
