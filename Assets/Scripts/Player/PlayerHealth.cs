@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private float maxHealth = 100.0f;
 
+    [SerializeField]
     private float currentHealth;
 
     [SerializeField]
@@ -149,4 +150,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         return maxHealth;
     }
+
+    //===================================================
+    public void Heal(float value)
+    {
+        currentHealth = Mathf.Min(currentHealth + value, maxHealth);
+    }
+    //===================================================
 }

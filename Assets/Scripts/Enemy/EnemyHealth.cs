@@ -100,4 +100,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         return maxHealth;
     }
+
+    //===================================================
+    public void Heal(float value)
+    {
+        currentHealth = Mathf.Min(currentHealth + value, maxHealth);
+    }
+    //===================================================
 }
