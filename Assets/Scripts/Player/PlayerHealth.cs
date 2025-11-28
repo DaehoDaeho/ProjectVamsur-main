@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
 {
     [SerializeField]
     private float maxHealth = 100.0f;
@@ -151,10 +151,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         return maxHealth;
     }
 
-    //===================================================
     public void Heal(float value)
     {
         currentHealth = Mathf.Min(currentHealth + value, maxHealth);
     }
-    //===================================================
 }

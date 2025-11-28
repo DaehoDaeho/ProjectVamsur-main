@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, IDamageable
+public class EnemyHealth : MonoBehaviour, IDamageable, IRecover
 {
     public float maxHealth = 100.0f;
     public SpriteRenderer spriteRenderer;
@@ -101,10 +101,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         return maxHealth;
     }
 
-    //===================================================
     public void Heal(float value)
     {
         currentHealth = Mathf.Min(currentHealth + value, maxHealth);
     }
-    //===================================================
 }
