@@ -36,6 +36,10 @@ public static class EliteRoller
         if (elite == null)
         {
             elite = target.AddComponent<EliteModifier>();
+            if(elite != null)
+            {
+                elite.Init();
+            }
         }
 
         // Inspector 노출 필드가 private라면 SerializeField로 보존되므로 런타임에 접근 불가할 수 있다.

@@ -13,6 +13,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover
 
     private Color originalColor;
 
+    private WaveDirector waveDirector;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -21,6 +23,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover
         {
             originalColor = spriteRenderer.color;
         }
+
+        waveDirector = GameObject.FindAnyObjectByType<WaveDirector>();
     }
 
     // Update is called once per frame
@@ -57,6 +61,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover
         if(drop != null)
         {
             drop.SpawnDrops();
+        }
+
+        if (waveDirector != null)
+        {
+            waveDirector.ReportKill();
         }
 
         Destroy(gameObject);

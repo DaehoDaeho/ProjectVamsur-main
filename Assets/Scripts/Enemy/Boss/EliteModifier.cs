@@ -45,6 +45,15 @@ public class EliteModifier : MonoBehaviour
         ApplyVisualHighlight();
     }
 
+    public void Init()
+    {
+        // 순서: 수치 → 면역/상태 → 시각
+        ApplyHealthMultiplier();
+        ApplyTouchDamageMultiplier();
+        ApplyImmunitiesAndPurgeStatuses();
+        ApplyVisualHighlight();
+    }
+
     /// <summary>
     /// EnemyHealth가 있으면 최대 체력에 배수를 적용하고,
     /// 옵션에 따라 현재 체력도 비율대로 보정한다.
@@ -167,9 +176,10 @@ public class EliteModifier : MonoBehaviour
     /// <summary>
     /// 시각 하이라이트(색상 틴트, 머티리얼 림 파워)를 적용한다.
     /// </summary>
-    private void ApplyVisualHighlight()
+    public void ApplyVisualHighlight()
     {
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        //SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (sr != null)
         {
             sr.color = rimColor;
