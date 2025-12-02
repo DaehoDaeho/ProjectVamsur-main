@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class UpgradeRuntimeState : MonoBehaviour
 {
-    private Dictionary<string, int> levelMap = new Dictionary<string, int>(); // id → level
+    private Dictionary<string, int> levelMap = new Dictionary<string, int>(); // id -> level
 
     /// <summary>
     /// 현재 레벨을 반환한다. 없으면 0.

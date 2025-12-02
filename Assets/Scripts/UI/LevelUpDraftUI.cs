@@ -40,6 +40,9 @@ public class LevelUpDraftUI : MonoBehaviour
     [SerializeField]
     private int rerollCount = 1;                    // 기본 리롤 횟수
 
+    [SerializeField]
+    private GameObject panelUpgrade;
+
     private List<UpgradeDefinition> currentOptions = new List<UpgradeDefinition>();
     private float cachedTimeScale = 1.0f;
     private float sessionElapsed;                   // 외부에서 세션 시간 전달 대신 내부 누적(간단 버전)
@@ -102,7 +105,7 @@ public class LevelUpDraftUI : MonoBehaviour
         //cachedTimeScale = Time.timeScale;
         Time.timeScale = 0.0f;
 
-        gameObject.SetActive(true);
+        panelUpgrade.SetActive(true);
     }
 
     /// <summary>
@@ -152,7 +155,7 @@ public class LevelUpDraftUI : MonoBehaviour
     /// <summary>
     /// 옵션 버튼 클릭 처리: 선택 적용 후 닫기.
     /// </summary>
-    private void OnOptionClicked(int index)
+    public void OnOptionClicked(int index)
     {
         if (index < 0 || index >= currentOptions.Count)
         {
@@ -190,7 +193,7 @@ public class LevelUpDraftUI : MonoBehaviour
     /// <summary>
     /// 리롤 버튼 클릭 처리: 남은 횟수 소모 후 다시 롤.
     /// </summary>
-    private void OnRerollClicked()
+    public void OnRerollClicked()
     {
         if (rerollCount <= 0)
         {
@@ -206,7 +209,7 @@ public class LevelUpDraftUI : MonoBehaviour
     /// </summary>
     private void Hide()
     {
-        gameObject.SetActive(false);
+        panelUpgrade.SetActive(false);
     }
 
     /// <summary>

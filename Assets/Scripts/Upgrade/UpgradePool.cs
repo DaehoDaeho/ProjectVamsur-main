@@ -4,6 +4,7 @@ using System.Collections.Generic;
 /// <summary>
 /// 업그레이드 드래프트를 위한 풀/가중치 롤을 관리한다.
 /// 진행 시간에 따라 희귀도 가중치를 조정할 수 있다.
+/// 선별 후보에서 희귀도/가중치로 선별 -> 최디 레벨인 항목 제외 -> 중복을 포함해서 N개 뽑기 (지금 당장은 3개)
 /// </summary>
 public class UpgradePool : MonoBehaviour
 {
