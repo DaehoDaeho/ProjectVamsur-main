@@ -16,7 +16,7 @@ public class LevelUpDraftUI : MonoBehaviour
     private UpgradeRuntimeState runtimeState;       // 레벨 상태
 
     [SerializeField]
-    private UpgradePool upgradePool;                // 롤 매니저
+    private UpgradePoolPlus upgradePool;                // 롤 매니저
 
     [SerializeField]
     private GameObject playerRoot;                  // 적용 대상(플레이어 루트)
