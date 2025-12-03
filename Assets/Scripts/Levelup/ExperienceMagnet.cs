@@ -34,7 +34,7 @@ public class ExperienceMagnet : MonoBehaviour
         {
             if (buffer[i] != null)
             {
-                ExperienceOrb orb = buffer[i].GetComponent<ExperienceOrb>();
+                ExpPickup orb = buffer[i].GetComponent<ExpPickup>();
                 if(orb != null)
                 {
                     orb.BeginMagnetize(transform);
