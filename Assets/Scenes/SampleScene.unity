@@ -1153,6 +1153,8 @@ MonoBehaviour:
   projectileCount: 1
   firePoint: {fileID: 636295847}
   projectilePrefab: {fileID: 8451299626861950299, guid: c054467200aeca14089e0bb598487897, type: 3}
+  poolManager: {fileID: 1673179753}
+  projectileKey: Projectile
   targetSearchRadius: 8
   targetLayerMask:
     serializedVersion: 2
@@ -2423,7 +2425,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289999614}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8160317276c1564682913068e3dd1ee, type: 3}
   m_Name: 
