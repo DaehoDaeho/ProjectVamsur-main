@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// ¿©·¯ ObjectPoolÀ» ¹­¾î Å°·Î °ü¸®ÇÑ´Ù.
-/// ¾îµğ¼­µç Spawn/Release¸¦ °£´ÜÈ÷ È£ÃâÇÒ ¼ö ÀÖ°Ô ÇØÁØ´Ù.
+/// ì—¬ëŸ¬ ObjectPoolì„ ë¬¶ì–´ í‚¤ë¡œ ê´€ë¦¬í•œë‹¤
+/// Spawn/Releaseë¥¼ ê°„ë‹¨íˆ í˜¸ì¶œí•  ìˆ˜ ìˆê²Œ í•´ì¤€ë‹¤.
 /// </summary>
 public class PoolManager : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class PoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿¡µğÅÍ¿¡ µî·ÏµÈ Ç®À» Å°·Î ¸Ê¿¡ ¿Ã¸°´Ù.
+    /// ë“±ë¡ëœ í’€ì„ í‚¤ë¡œ ë§µì— ì˜¬ë¦°ë‹¤
     /// </summary>
     private void BuildMap()
     {
@@ -49,7 +49,7 @@ public class PoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Å°·Î ¿ÀºêÁ§Æ® ÇÏ³ª¸¦ ²¨³½´Ù. ½ÇÆĞ ½Ã null.
+    /// í‚¤ë¥¼ ì´ìš©í•´ì„œ ì˜¤ë¸Œì íŠ¸ í•˜ë‚˜ë¥¼ êº¼ë‚¸ë‹¤
     /// </summary>
     public PooledObject Spawn(string key, Vector3 pos, Quaternion rot)
     {
@@ -72,7 +72,7 @@ public class PoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ÀºêÁ§Æ®¸¦ È¸¼öÇÑ´Ù.
+    /// ì˜¤ë¸Œì íŠ¸ë¥¼ ë°˜í™˜
     /// </summary>
     public void Release(PooledObject obj)
     {
@@ -88,7 +88,7 @@ public class PoolManager : MonoBehaviour
             return;
         }
 
-        // ¿¹¿ÜÀûÀ¸·Î ¼ÒÀ¯ Ç®À» ¸ø Ã£À¸¸é ±×³É ºñÈ°¼º
+        // ë§Œì•½ ì†Œìœ  í’€ì„ ëª»ì°¾ì•˜ì„ ê²½ìš° ê·¸ëƒ¥ ë¹„í™œì„±í™” ì²˜ë¦¬
         obj.gameObject.SetActive(false);
     }
 }

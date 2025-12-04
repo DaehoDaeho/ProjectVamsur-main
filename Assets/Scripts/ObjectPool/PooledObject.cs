@@ -1,21 +1,20 @@
 using UnityEngine;
 
 /// <summary>
-/// Ç®¿¡¼­ ²¨³» ¾²´Â ¿ÀºêÁ§Æ®¿¡ ºÎÂøÇÑ´Ù.
-/// ÀÚ½ÅÀÌ ¾î´À Ç®¿¡¼­ ¿Ô´ÂÁö ±â¾ïÇÏ°í, ¼ö¸í/Ãæµ¹/È­¸é ÀÌÅ» ½Ã Ç®·Î µÇµ¹¸°´Ù.
+/// í’€ì—ì„œ êº¼ë‚´ ì“°ëŠ” ì˜¤ë¸Œì íŠ¸ì— ë¶€ì°©
+/// ìì‹ ì´ ì–´ëŠ í’€ì—ì„œ ì™”ëŠ”ì§€ ê¸°ì–µí•˜ê³ , ìˆ˜ëª…/ì¶©ëŒ/í™”ë©´ ì´íƒˆ ì‹œ í’€ë¡œ ë˜ëŒë¦°ë‹¤
 /// </summary>
 public class PooledObject : MonoBehaviour
 {
     [SerializeField]
-    private float lifeTimeSeconds = 5.0f; // ¼ö¸í. 0 ÀÌÇÏ¸é ¹«ÇÑ
+    private float lifeTimeSeconds = 5.0f; // ìˆ˜ëª…
 
     private ObjectPool ownerPool;
     private float lifeTimer;
 
     /// <summary>
-    /// Ç®¿¡¼­ ³ª¿Ã ¶§ ¼ÒÀ¯ Ç®°ú ÃÊ±âÈ­ ½Ã°£À» ¼³Á¤ÇÑ´Ù.
+    /// í’€ì—ì„œ ë‚˜ì˜¬ ë•Œ ì†Œìœ ìì™€ ìˆ˜ëª… ì£¼ê¸°ë¥¼ ì„¤ì •í•œë‹¤
     /// </summary>
-    /// <param name="pool">ÀÚ½ÅÀ» °ü¸®ÇÏ´Â Ç®</param>
     public void OnSpawned(ObjectPool pool)
     {
         ownerPool = pool;
@@ -35,9 +34,8 @@ public class PooledObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ÜºÎ¿¡¼­ ¼ö¸íÀ» ¿¬ÀåÇÏ°Å³ª Áï½Ã È¸¼öÇÏµµ·Ï Á¶Á¤ÇÒ ¼ö ÀÖ´Ù.
+    /// ìˆ˜ëª… ì£¼ê¸°ë¥¼ ì„¸íŒ…
     /// </summary>
-    /// <param name="seconds">»õ ¼ö¸í(ÃÊ)</param>
     public void SetLifeTime(float seconds)
     {
         lifeTimeSeconds = seconds;
@@ -45,7 +43,7 @@ public class PooledObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Ãæµ¹ ½Ã È¸¼öÇÏ°í ½ÍÀ» ¶§ È£ÃâÇÑ´Ù(ÇÊ¿ä ½Ã Projectile/Enemy¿¡¼­ Á÷Á¢ È£Ãâ).
+    /// í’€ë¡œ ë‹¤ì‹œ ë°˜í™˜ ì‹œ í˜¸ì¶œ
     /// </summary>
     public void Release()
     {

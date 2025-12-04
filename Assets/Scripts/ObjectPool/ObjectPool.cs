@@ -2,24 +2,24 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// ´ÜÀÏ ÇÁ¸®ÆÕÀ» °ü¸®ÇÏ´Â ¿ÀºêÁ§Æ® Ç®.
+/// í”„ë¦¬íŒ¹ì„ ê´€ë¦¬í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ í’€ ìŠ¤í¬ë¦½íŠ¸
 /// </summary>
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField]
-    private string poolKey = "Projectile"; // PoolManager¿¡¼­ Ã£À» ¶§ ¾²´Â Å°
+    private string poolKey = "Projectile"; // PoolManagerì—ì„œ ì°¾ì„ ë•Œ ì“°ëŠ” í‚¤
 
     [SerializeField]
-    private PooledObject prefab; // ¹İµå½Ã PooledObject°¡ ºÙÀº ÇÁ¸®ÆÕ
+    private PooledObject prefab; // í”„ë¦¬íŒ¹
 
     [SerializeField]
-    private int warmCount = 30; // ½ÃÀÛ ½Ã ¹Ì¸® ¸¸µé¾î µÑ °³¼ö
+    private int warmCount = 30; // ë¯¸ë¦¬ ë§Œë“¤ì–´ ë†“ì„ ê°œìˆ˜
 
     private readonly Queue<PooledObject> queue = new Queue<PooledObject>();
     private int totalCreated;
 
     /// <summary>
-    /// PoolManager°¡ Å°·Î ÀÌ Ç®À» µî·ÏÇÒ ¶§ »ç¿ëÇÑ´Ù.
+    /// PoolManagerê°€ í‚¤ë¡œ ì´í’€ì„ ë“±ë¡í•  ë•Œ ì‚¬ìš©í•˜ê¸° ìœ„í•œ í•¨ìˆ˜
     /// </summary>
     public string GetKey()
     {
@@ -32,9 +32,8 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// ÃÊ±â ¿ö¹Ö¾÷. ¿äÃ» °³¼ö¸¸Å­ ¸¸µé¾î ºñÈ°¼º Å¥¿¡ ³Ö´Â´Ù.
+    /// ì¸ìë¡œ ë°›ì€ ì¹´ìš´íŠ¸ë§Œí¼ ì´ì•Œì„ ìƒì„±
     /// </summary>
-    /// <param name="count">»ı¼º °³¼ö</param>
     public void Warm(int count)
     {
         for (int i = 0; i < count; ++i)
@@ -44,9 +43,8 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÏ³ª¸¦ ²¨³½´Ù. ¾øÀ¸¸é ÀÚµ¿ È®ÀåÇÑ´Ù.
+    /// Queueì—ì„œ ì´ì•Œì„ êº¼ë‚´ì˜¤ëŠ” í•¨ìˆ˜
     /// </summary>
-    /// <returns>È°¼ºÈ­µÈ PooledObject</returns>
     public PooledObject Spawn()
     {
         PooledObject obj = null;
@@ -70,9 +68,8 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// È¸¼ö: ºñÈ°¼ºÈ­ ÈÄ Å¥¿¡ ³Ö´Â´Ù.
+    /// ì‚¬ìš©ì´ ëë‚œ ì´ì•Œì„ ë°˜í™˜
     /// </summary>
-    /// <param name="pooled">µ¹·Áº¸³¾ ¿ÀºêÁ§Æ®</param>
     public void Release(PooledObject pooled)
     {
         if (pooled == null)
@@ -85,7 +82,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇöÀç Å¥¿¡ ´ë±â ÁßÀÎ °³¼ö.
+    /// í˜„ì¬ ì‚¬ìš©ê°€ëŠ¥í•œ ì´ì•Œì˜ ìˆ˜ë¥¼ ë°˜í™˜
     /// </summary>
     public int GetAvailableCount()
     {
@@ -93,13 +90,16 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// Áö±İ±îÁö ½ÇÁ¦·Î ¸¸µç ÃÑ °³¼ö(Áø´Ü¿ë).
+    /// ë¯¸ë¦¬ ìƒì„±ëœ ì´ì•Œì˜ ì¹´ìš´íŠ¸ë¥¼ ë°˜í™˜
     /// </summary>
     public int GetTotalCreated()
     {
         return totalCreated;
     }
 
+    /// <summary>
+    /// ë¯¸ë¦¬ ì´ì•Œì„ ë§Œë“¤ì–´ ë‘ëŠ” í•¨ìˆ˜
+    /// </summary>
     private PooledObject CreateOneInactive()
     {
         if (prefab == null)

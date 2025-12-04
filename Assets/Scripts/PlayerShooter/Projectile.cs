@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     private float elapsed;
 
-    // ½Å±Ô: ÀüÅõ ÆÄ¶ó¹ÌÅÍ
+    // ï¿½Å±ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
     public bool canCrit;
     public float critChance;
     public float critMultiplier = 2.0f;
@@ -23,14 +23,12 @@ public class Projectile : MonoBehaviour
     public float freezeDuration;
     public GameObject owner;
 
-    //======================================================
     private PooledObject pooled;
 
     private void Awake()
     {
         pooled = GetComponent<PooledObject>();
     }
-    //======================================================
 
     // Update is called once per frame
     void Update()
@@ -41,13 +39,11 @@ public class Projectile : MonoBehaviour
         elapsed += Time.deltaTime;
         if(elapsed >= lifeTime)
         {
-            //=====================================================
             if (pooled != null)
             {
                 pooled.Release();
                 return;
             }
-            //=====================================================
 
             Destroy(gameObject);
         }
@@ -61,7 +57,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            // ¹æÇâÀÌ (0, 0)ÀÏ °æ¿ì¿¡´Â µğÆúÆ®·Î ¿À¸¥ÂÊ ¹æÇâÀ¸·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (0, 0)ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             moveDirection = Vector2.right;
         }
     }
@@ -80,8 +76,8 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // ÀÚ±â Æí ÇÊÅÍ µîÀº »ı·«(ÇÁ·ÎÁ§Æ® ±ÔÄ¢¿¡ ¸Â°Ô Ãß°¡ °¡´É)
-        // ¿ì¼± Router¸¦ Ã£´Â´Ù.
+        // ï¿½Ú±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ä¢ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½)
+        // ï¿½ì¼± Routerï¿½ï¿½ Ã£ï¿½Â´ï¿½.
         DamageRouter router = collision.GetComponent<DamageRouter>();
         if (router != null)
         {
@@ -101,13 +97,12 @@ public class Projectile : MonoBehaviour
 
             router.Receive(ctx);
 
-            //=====================================================
             if (pooled != null)
             {
                 pooled.Release();
                 return;
             }
-            //=====================================================
+            
             Destroy(gameObject);
             return;
         }
@@ -118,18 +113,16 @@ public class Projectile : MonoBehaviour
             damageable.ApplyDamage(damage);
         }
 
-        //=====================================================
         if (pooled != null)
         {
             pooled.Release();
             return;
         }
-        //=====================================================
 
         Destroy(gameObject);
     }
 
-    // --- ½Å±Ô Setterµé(¹«±â¿¡¼­ ÁÖÀÔ) ---
+    // --- ï¿½Å±ï¿½ Setterï¿½ï¿½(ï¿½ï¿½ï¿½â¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) ---
     public void SetOwner(GameObject obj)
     {
         owner = obj;
@@ -167,9 +160,8 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    //===================================================
     /// <summary>
-    /// ¿ÜºÎ¿¡¼­ µ¥¹ÌÁö¸¦ ÀĞ°í ½ÍÀ» ¶§ »ç¿ë.
+    /// ëŒ€ë¯¸ì§€ë¥¼ ë°˜í™˜
     /// </summary>
     public float GetDamage()
     {
@@ -177,11 +169,10 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åº ¼Óµµ¸¦ µ¿ÀûÀ¸·Î Á¶Á¤ÇÏ°í ½ÍÀ» ¶§ »ç¿ë.
+    /// ì†ë„ë¥¼ ì„¸íŒ…
     /// </summary>
     public void SetSpeed(float v)
     {
         moveSpeed = v;
     }
-    //===================================================
 }
