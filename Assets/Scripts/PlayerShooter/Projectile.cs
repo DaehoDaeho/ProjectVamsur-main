@@ -23,6 +23,15 @@ public class Projectile : MonoBehaviour
     public float freezeDuration;
     public GameObject owner;
 
+    //======================================================
+    private PooledObject pooled;
+
+    private void Awake()
+    {
+        pooled = GetComponent<PooledObject>();
+    }
+    //======================================================
+
     // Update is called once per frame
     void Update()
     {
@@ -32,6 +41,14 @@ public class Projectile : MonoBehaviour
         elapsed += Time.deltaTime;
         if(elapsed >= lifeTime)
         {
+            //=====================================================
+            if (pooled != null)
+            {
+                pooled.Release();
+                return;
+            }
+            //=====================================================
+
             Destroy(gameObject);
         }
     }
@@ -84,6 +101,13 @@ public class Projectile : MonoBehaviour
 
             router.Receive(ctx);
 
+            //=====================================================
+            if (pooled != null)
+            {
+                pooled.Release();
+                return;
+            }
+            //=====================================================
             Destroy(gameObject);
             return;
         }
@@ -93,6 +117,14 @@ public class Projectile : MonoBehaviour
         {
             damageable.ApplyDamage(damage);
         }
+
+        //=====================================================
+        if (pooled != null)
+        {
+            pooled.Release();
+            return;
+        }
+        //=====================================================
 
         Destroy(gameObject);
     }
@@ -124,6 +156,7 @@ public class Projectile : MonoBehaviour
             burnDuration = duration;
         }
     }
+
     public void SetFreeze(float slowPercent, float duration)
     {
         if (slowPercent > 0.0f && duration > 0.0f)
@@ -133,4 +166,22 @@ public class Projectile : MonoBehaviour
             freezeDuration = duration;
         }
     }
+
+    //===================================================
+    /// <summary>
+    /// 외부에서 데미지를 읽고 싶을 때 사용.
+    /// </summary>
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+    /// <summary>
+    /// 탄 속도를 동적으로 조정하고 싶을 때 사용.
+    /// </summary>
+    public void SetSpeed(float v)
+    {
+        moveSpeed = v;
+    }
+    //===================================================
 }
