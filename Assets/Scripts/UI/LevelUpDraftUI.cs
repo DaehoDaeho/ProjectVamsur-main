@@ -111,7 +111,7 @@ public class LevelUpDraftUI : MonoBehaviour
     /// <summary>
     /// 드래프트 UI를 닫고 게임을 재개한다.
     /// </summary>
-    private void CloseDraft()
+    public void CloseDraft()
     {
         Time.timeScale = cachedTimeScale;
         Hide();

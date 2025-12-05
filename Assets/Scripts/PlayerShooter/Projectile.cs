@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -35,18 +36,6 @@ public class Projectile : MonoBehaviour
     {
         Vector3 delta = (Vector3)(moveDirection * moveSpeed * Time.deltaTime);
         transform.position += delta;
-
-        elapsed += Time.deltaTime;
-        if(elapsed >= lifeTime)
-        {
-            if (pooled != null)
-            {
-                pooled.Release();
-                return;
-            }
-
-            Destroy(gameObject);
-        }
     }
 
     public void SetDirection(Vector2 dir)
@@ -76,8 +65,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // �ڱ� �� ���� ���� ����(������Ʈ ��Ģ�� �°� �߰� ����)
-        // �켱 Router�� ã�´�.
         DamageRouter router = collision.GetComponent<DamageRouter>();
         if (router != null)
         {

@@ -32,13 +32,11 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField]
     private GameObject projectilePrefab;
 
-    //==========================================================
     [SerializeField]
     private PoolManager poolManager;
 
     [SerializeField]
     private string projectileKey = "Projectile";
-    //==========================================================
 
     protected GameManager gameManager;
 
@@ -135,13 +133,14 @@ public abstract class WeaponBase : MonoBehaviour
             Vector2 dir = directions[i];
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
+            //GameObject projObj = Instantiate(projectilePrefab, spawnPos, Quaternion.Euler(0.0f, 0.0f, angle));
+
             PooledObject projObj = poolManager.Spawn(projectileKey, spawnPos, Quaternion.Euler(0.0f, 0.0f, angle));
             if (projObj == null)
             {
                 continue;
             }
 
-            //GameObject projObj = Instantiate(projectilePrefab, spawnPos, Quaternion.Euler(0.0f, 0.0f, angle));
             Projectile proj = projObj.GetComponent<Projectile>();
             if(proj != null)
             {
