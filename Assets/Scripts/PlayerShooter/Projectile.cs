@@ -24,6 +24,10 @@ public class Projectile : MonoBehaviour
     public float freezeDuration;
     public GameObject owner;
 
+    //========================================================
+    public DamageType damageType = DamageType.Physical; // 피해 종류
+    //========================================================
+
     private PooledObject pooled;
 
     private void Awake()
@@ -65,34 +69,50 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        DamageRouter router = collision.GetComponent<DamageRouter>();
-        if (router != null)
+        //DamageRouter router = collision.GetComponent<DamageRouter>();
+        //if (router != null)
+        //{
+        //    DamageContext ctx = new DamageContext();
+        //    ctx.baseDamage = damage;
+        //    ctx.canCrit = canCrit;
+        //    ctx.critChance = critChance;
+        //    ctx.critMultiplier = critMultiplier;
+        //    ctx.knockbackForce = knockbackForce;
+        //    ctx.applyBurn = applyBurn;
+        //    ctx.burnDps = burnDps;
+        //    ctx.burnDuration = burnDuration;
+        //    ctx.applyFreeze = applyFreeze;
+        //    ctx.freezeSlowPercent = freezeSlowPercent;
+        //    ctx.freezeDuration = freezeDuration;
+        //    ctx.attacker = owner != null ? owner : gameObject;
+
+        //    router.Receive(ctx);
+
+        //    if (pooled != null)
+        //    {
+        //        pooled.Release();
+        //        return;
+        //    }
+
+        //    Destroy(gameObject);
+        //    return;
+        //}
+
+        //===========================================================
+        Transform attacker = transform; // 가해자 변환
+        Transform target = collision.transform; // 피격자 변환
+        Vector3 pos = collision.bounds.center; // 피격 위치
+
+        HitContext context = HitContext.Create(attacker, target, pos, damage, damageType); // 히트 문맥 생성
+
+        EventBus.PublishHit(context); // 닿음 알림 발행
+
+        IReceivesHitContext ctxReceiver = collision.GetComponent<IReceivesHitContext>(); // 문맥 수신 가능 여부
+        if (ctxReceiver != null)
         {
-            DamageContext ctx = new DamageContext();
-            ctx.baseDamage = damage;
-            ctx.canCrit = canCrit;
-            ctx.critChance = critChance;
-            ctx.critMultiplier = critMultiplier;
-            ctx.knockbackForce = knockbackForce;
-            ctx.applyBurn = applyBurn;
-            ctx.burnDps = burnDps;
-            ctx.burnDuration = burnDuration;
-            ctx.applyFreeze = applyFreeze;
-            ctx.freezeSlowPercent = freezeSlowPercent;
-            ctx.freezeDuration = freezeDuration;
-            ctx.attacker = owner != null ? owner : gameObject;
-
-            router.Receive(ctx);
-
-            if (pooled != null)
-            {
-                pooled.Release();
-                return;
-            }
-            
-            Destroy(gameObject);
-            return;
+            ctxReceiver.SetHitContext(context); // 문맥 저장 요청
         }
+        //===========================================================
 
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if(damageable != null)
