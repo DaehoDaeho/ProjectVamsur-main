@@ -1,6 +1,15 @@
 using UnityEngine;
 
 /// <summary>
+/// 간단한 피해 종류 구분
+/// </summary>
+public enum DamageType
+{
+    Physical = 0,
+    Piercing = 1
+}
+
+/// <summary>
 /// 히트 순간의 정보 묶음
 /// </summary>
 public struct HitContext
@@ -21,13 +30,4 @@ public struct HitContext
         c.damageType = type; // 피해 종류
         return c;
     }
-}
-
-/// <summary>
-/// 간단한 피해 종류 구분
-/// </summary>
-public enum DamageType
-{
-    Physical = 0,
-    Piercing = 1
 }

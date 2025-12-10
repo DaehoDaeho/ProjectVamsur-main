@@ -15,13 +15,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
 
     private WaveDirector waveDirector;
 
-    //===========================================================
     private bool hasLastContext; // 최근 문맥 보유 여부
     private HitContext lastContext; // 최근 문맥 저장
     
     [SerializeField, Range(0.0f, 0.9f)]
     private float resistance = 0.1f; // 피해 저항
-    //===========================================================
 
     private void Awake()
     {
@@ -34,9 +32,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
 
         waveDirector = GameObject.FindAnyObjectByType<WaveDirector>();
 
-        //=========================================================
         hasLastContext = false; // 문맥 보유 초기화
-        //=========================================================
     }
 
     // Update is called once per frame
@@ -58,7 +54,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
 
     public void ApplyDamage(float amount)
     {
-        //=====================================================
         HitContext context; // 사용할 문맥
         if (hasLastContext == true)
         {
@@ -67,23 +62,21 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
         }
         else
         {
-            context = HitContext.Create(null, transform, transform.position, amount, DamageType.Physical); // 기본 문맥 합성
+            context = HitContext.Create(null, transform, transform.position,
+                amount, DamageType.Physical); // 기본 문맥 합성
         }
 
         float finalDamage = DamageResolver.ComputeFinalDamage(context, resistance, amount); // 최종 피해 계산
-        //=====================================================
-
-        currentHealth -= amount;
+        
+        currentHealth -= finalDamage;
 
         PlayHitFlash();
 
-        //=====================================================
         DamageAppliedEvent e = new DamageAppliedEvent(); // 피해확정 알림 데이터
         e.context = context; // 문맥
         e.finalDamage = finalDamage; // 최종 피해
         e.remainingHp = currentHealth; // 남은 체력
         EventBus.PublishDamageApplied(e); // 피해확정 알림 발행
-        //=====================================================
 
         if (currentHealth <= 0.0f)
         {
@@ -150,7 +143,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
         currentHealth = Mathf.Min(currentHealth + value, maxHealth);
     }
 
-    //===========================================================
     /// <summary>
     /// 다음 피해 적용에서 사용할 히트 문맥을 저장한다
     /// </summary>
@@ -159,5 +151,4 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
         lastContext = context; // 문맥 저장
         hasLastContext = true; // 보유 표시
     }
-    //===========================================================
 }

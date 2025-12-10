@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public static class EventBus
 {
-    public static event Action<HitContext> OnHit; // 닿음 알림
+    public static event Action<HitContext> OnHit; // 명중 알림
     public static event Action<DamageAppliedEvent> OnDamageApplied; // 피해확정 알림
     public static event Action<DeathEvent> OnDeath; // 사망 알림
 
@@ -54,5 +54,5 @@ public struct DamageAppliedEvent
 public struct DeathEvent
 {
     public HitContext context;   // 마지막 히트 문맥
-    public Transform victim;     // 희생자 변환
+    public Transform victim;     // 희생자 Transform
 }

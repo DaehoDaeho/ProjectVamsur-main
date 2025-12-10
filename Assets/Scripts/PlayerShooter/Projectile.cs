@@ -24,9 +24,7 @@ public class Projectile : MonoBehaviour
     public float freezeDuration;
     public GameObject owner;
 
-    //========================================================
     public DamageType damageType = DamageType.Physical; // 피해 종류
-    //========================================================
 
     private PooledObject pooled;
 
@@ -98,7 +96,6 @@ public class Projectile : MonoBehaviour
         //    return;
         //}
 
-        //===========================================================
         Transform attacker = transform; // 가해자 변환
         Transform target = collision.transform; // 피격자 변환
         Vector3 pos = collision.bounds.center; // 피격 위치
@@ -112,7 +109,6 @@ public class Projectile : MonoBehaviour
         {
             ctxReceiver.SetHitContext(context); // 문맥 저장 요청
         }
-        //===========================================================
 
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if(damageable != null)
