@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5455551349946270254}
   - component: {fileID: 8998877726221401307}
   - component: {fileID: 4779822091999214073}
+  - component: {fileID: -2475614288321344860}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -192,6 +193,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 9144629756859964607}
   hitFlashTime: 0.05
   drop: {fileID: 7891522295332296041}
+  resistance: 0.1
 --- !u!114 &4946445391724275329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,3 +278,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
   enemyChase: {fileID: 2893153504507420538}
+--- !u!114 &-2475614288321344860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60debfb649088640959b959f402aee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aliveRegistry: {fileID: 0}
