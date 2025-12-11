@@ -56,6 +56,9 @@ public class WaveDirector : MonoBehaviour
     [SerializeField]
     private EventLogUI eventLog;            // 이벤트 로그
 
+    [SerializeField]
+    private AliveRegistry aliveRegistry;
+
     private GameManager gameManager;
     private int currentWave;
     private float nextWaveTimer;            // 다음 웨이브까지 남은 시간
@@ -207,6 +210,11 @@ public class WaveDirector : MonoBehaviour
 
                     // 엘리트 부여
                     EliteRoller.TryApplyElite(mob, eliteChance, 2.0f, 1.5f);
+
+                    if(aliveRegistry != null)
+                    {
+                        aliveRegistry.Register(mob);
+                    }
                 }
             }
 
