@@ -108,7 +108,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
     {
         if(gameManager != null)
         {
-            gameManager.HandleGameClear();
+            //gameManager.HandleGameClear();
+            gameManager.HandleGameOver();
         }
     }
 

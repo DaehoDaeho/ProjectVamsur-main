@@ -2,6 +2,8 @@ public enum GameState
 {
     Ready = 0,
     Playing = 1,
-    GameOver = 2,
-    Clear = 3
+    Paused = 2,
+    GameOver = 3,
+    Clear = 4,
+    PostResult = 5
 }
