@@ -59,6 +59,9 @@ public class WaveDirector : MonoBehaviour
     [SerializeField]
     private AliveRegistry aliveRegistry;
 
+    [SerializeField]
+    private SafeSpawnRingProvider safeSpawnRingProvider;
+
     private GameManager gameManager;
     private int currentWave;
     private float nextWaveTimer;            // 다음 웨이브까지 남은 시간
@@ -188,12 +191,21 @@ public class WaveDirector : MonoBehaviour
         // 스폰 실행
         for (int i = 0; i < spawnCount; i = i + 1)
         {
-            SpawnPoint sp = PickSpawnPoint();
+            //SpawnPoint sp = PickSpawnPoint();
+            Vector3 pos = Vector3.zero;
+            bool didSpawn = safeSpawnRingProvider.TrySample(out pos);
+            if(didSpawn == false)
+            {
+                continue;
+            }
+
             GameObject prefab = PickEnemyPrefab();
 
-            if (sp != null && prefab != null)
+            //if (sp != null && prefab != null)
+            if(prefab != null)
             {
-                GameObject mob = sp.Spawn(prefab, minPlayerDistance);
+                //GameObject mob = sp.Spawn(prefab, minPlayerDistance);
+                GameObject mob = Instantiate(prefab, pos, Quaternion.identity);
 
                 if (mob != null)
                 {
