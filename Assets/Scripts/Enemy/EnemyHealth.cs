@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
 
     public DropOnDeath drop;
 
+    [SerializeField]
     private float currentHealth;
     private float hitFlashTimer;
 
@@ -95,6 +96,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
         {
             waveDirector.ReportKill();
         }
+
+        DeathEvent deathEvent = new DeathEvent();
+        deathEvent.victim = transform;
+        EventBus.PublishDeath(deathEvent);
 
         Destroy(gameObject);
     }
