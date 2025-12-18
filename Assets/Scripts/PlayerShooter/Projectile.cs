@@ -26,6 +26,8 @@ public class Projectile : MonoBehaviour
 
     public DamageType damageType = DamageType.Physical; // 피해 종류
 
+    public string targetTag = "Enemy";
+
     private PooledObject pooled;
 
     private void Awake()
@@ -62,7 +64,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy") == false)
+        if(collision.CompareTag(targetTag) == false)
         {
             return;
         }
