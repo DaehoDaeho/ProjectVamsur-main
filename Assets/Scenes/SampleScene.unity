@@ -3376,7 +3376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 326995743}
   player: {fileID: 1289999618}
-  bossPrefab: {fileID: 7314212090436886730, guid: 55ee0abffb914694a806c20a26e1325e, type: 3}
+  bossPrefab: {fileID: 7817803834926060983, guid: 55ee0abffb914694a806c20a26e1325e, type: 3}
   safeProvider: {fileID: 1888198569}
   spawnTimeSeconds: 30
   fallbackOffset: {x: 13, y: 0}
