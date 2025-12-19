@@ -62,6 +62,9 @@ public class WaveDirector : MonoBehaviour
     [SerializeField]
     private SafeSpawnRingProvider safeSpawnRingProvider;
 
+    [SerializeField]
+    private int[] enemyPrefabWeight;
+
     private GameManager gameManager;
     private int currentWave;
     private float nextWaveTimer;            // 다음 웨이브까지 남은 시간
@@ -277,6 +280,33 @@ public class WaveDirector : MonoBehaviour
         if (enemyPrefabs == null || enemyPrefabs.Count == 0)
         {
             return null;
+        }
+
+        if(enemyPrefabWeight != null && enemyPrefabWeight.Length > 0)
+        {
+            int sumWeight = 0;
+            for (int i=0; i<enemyPrefabWeight.Length; ++i)
+            {
+                // 가중치의 합을 누적.
+                sumWeight += enemyPrefabWeight[i];
+            }
+
+            // 1~가중치의 합 사이에서 값을 무작위로 선택.
+            int weight = Random.Range(1, sumWeight+1);
+            Debug.Log("weight = " + weight);
+
+            int selectWeight = 0;
+            for (int i = 0; i < enemyPrefabWeight.Length; ++i)
+            {
+                selectWeight += enemyPrefabWeight[i];
+
+                // 무작위로 선택된 값이 각 가중치에 걸리는지 비교.
+                if(weight <= selectWeight)
+                {
+                    Debug.Log("Select Index = " + i);
+                    return enemyPrefabs[i];
+                }
+            }
         }
 
         int idx = Random.Range(0, enemyPrefabs.Count);

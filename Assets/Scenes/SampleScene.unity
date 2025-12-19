@@ -6166,6 +6166,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 7548560821087048553, guid: acc9ab0043c2a764083306e443d4a377, type: 3}
   - {fileID: 7548560821087048553, guid: de42d9843ff7b044e8819cf5eb2d4bd6, type: 3}
+  - {fileID: 7548560821087048553, guid: b200ba3019173f14d89db0d29217737c, type: 3}
   minPlayerDistance: 3
   timeBetweenWaves: 15
   killsRequired: 10
@@ -6180,6 +6181,7 @@ MonoBehaviour:
   eventLog: {fileID: 0}
   aliveRegistry: {fileID: 939453192}
   safeSpawnRingProvider: {fileID: 1888198569}
+  enemyPrefabWeight: 050000000300000002000000
 --- !u!4 &1868304867
 Transform:
   m_ObjectHideFlags: 0
