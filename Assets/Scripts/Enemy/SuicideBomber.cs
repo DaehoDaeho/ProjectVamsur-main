@@ -7,32 +7,49 @@ using UnityEngine;
 public class SuicideBomber : MonoBehaviour
 {
     [SerializeField]
-    private Transform player;   // 플레이어.
+    private Transform player;
 
     [SerializeField]
-    private float moveSpeed = 3.0f; // 이동 속도.
+    private BomberWarningPulse warning;
 
     [SerializeField]
-    private float detectDistance = 10.0f;   // 감지 가능 거리 범위.
+    private float moveSpeed = 3.0f;
 
     [SerializeField]
-    private float fuseRadius = 2.5f;    // 퓨즈 시동 가능 거리.
+    private float detectDistance = 10.0f;
 
     [SerializeField]
-    private float fuseSeconds = 1.0f;   // 퓨즈 유지 시간.
+    private float fuseRadius = 2.5f;
 
     [SerializeField]
-    private float explodeRadius = 3.0f; // 폭발 적용 반경.
+    private float fuseSeconds = 0.8f;
 
     [SerializeField]
-    private float explosionDamage = 20.0f;  // 폭발 대미지.
+    private float explodeRadius = 3.0f;
 
     [SerializeField]
-    private LayerMask targetLayer;  // 대미지를 적용할 오브젝트의 레이어.
+    private float explosionDamage = 20.0f;
 
-    private bool fuseArmed; // 현재 퓨즈 시동 중인지 여부.
-    private float fuseRemain;    // 퓨즈 타이머.
+    [SerializeField]
+    private LayerMask targetLayer;
 
+    [SerializeField]
+    private bool instantDetonateOnTrigger = true;   // 접촉 시 즉시 폭발할지 여부.
+
+    [SerializeField]
+    private LayerMask instantLayer; // 접촉 대상 레이어.
+
+    [SerializeField]
+    private bool chainAffectBomber = true;  // 주변의 자폭형 적들에게 영향을 줄 지 여부.
+
+    [SerializeField]
+    private bool chainInstant = false;
+
+    [SerializeField]
+    private float chainFuseSeconds = 0.4f;
+
+    private bool fuseArmed; //  퓨즈 시동 중인지 여부.
+    private float fuseRemain;   // 퓨즈 타이머 변수.
     private bool exploded;  // 폭발 했는지 여부.
 
     private void Awake()
@@ -40,38 +57,181 @@ public class SuicideBomber : MonoBehaviour
         fuseArmed = false;
         fuseRemain = 0.0f;
         exploded = false;
+
+        if(warning == null)
+        {
+            warning = GetComponentInChildren<BomberWarningPulse>();
+        }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
-        if (go != null)
+        if(go != null)
         {
             player = go.transform;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(player == null)
+        if(instantDetonateOnTrigger == false)
         {
             return;
         }
 
+        int layer = collision.gameObject.layer;
+
+        // 쉬프트(Shift) 연산 -> 비트를 지정한 회수만큼 왼쪽 또는 오른쪽으로 옮기는 연산.
+        // layer 변수의 값을 왼쪽으로 한 칸 쉬프트.
+        // 만약 layer 변수에 저장된 값이 1일 경우.
+        // 1을 2진수로 변환하면 0000 0001.
+        // 위의 값을 왼쪽으로 한 칸 쉬프트 연산을 하면 0000 0010이 된다.
+        int bit = 1 << layer;
+
+        // 비트 & 연산.
+        // 두 수를 각각 2진수로 변환한 다음,
+        // 양쪽의 요소가 모두 1인 경우에만 1, 나머지 경우에는 모두 0.
+        int masked = instantLayer.value & bit;
+
+        if(masked != 0)
+        {
+            // 폭발 처리.
+            Explode();
+        }
+    }
+
+    void Explode()
+    {
         if(exploded == true)
+        {
+            return;
+        }
+
+        exploded = true;
+
+        if(warning != null)
+        {
+            warning.StopWarning();
+        }
+
+        Vector3 p = transform.position;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(p, explodeRadius, targetLayer);
+        if(hits != null)
+        {
+            for(int i=0; i<hits.Length; ++i)
+            {
+                Collider2D col = hits[i];
+                if(col == null)
+                {
+                    continue;
+                }
+
+                IDamageable damageable = col.GetComponent<IDamageable>();
+                if(damageable != null)
+                {
+                    damageable.ApplyDamage(explosionDamage);
+                }
+            }
+        }
+
+        if(chainAffectBomber == true)
+        {
+            Collider2D[] nearAll = Physics2D.OverlapCircleAll(p, explodeRadius);
+            if(nearAll != null)
+            {
+                for(int i=0; i<nearAll.Length; ++i)
+                {
+                    Collider2D col = nearAll[i];
+                    if(col == null)
+                    {
+                        continue;
+                    }
+
+                    SuicideBomber other = col.GetComponent<SuicideBomber>();
+                    if(other == null)
+                    {
+                        continue;
+                    }
+
+                    if(other == this)
+                    {
+                        continue;
+                    }
+
+                    if(chainInstant == true)
+                    {
+                        // 폭발 요청.
+                        other.RequestInstantExplosion();
+                    }
+                    else
+                    {
+                        // 퓨즈 시동 요청.
+                        other.ArmFuseShort(chainFuseSeconds);
+                    }
+                }
+            }
+        }
+
+        Destroy(gameObject);
+    }
+
+    public void RequestInstantExplosion()
+    {
+        Explode();
+    }
+
+    public void ArmFuseShort(float seconds)
+    {
+        if(exploded == true)
+        {
+            return;
+        }
+
+        fuseArmed = true;
+        fuseRemain = seconds;
+
+        if(warning != null)
+        {
+            warning.StartWarning();
+        }
+    }
+
+    void ArmFuse()
+    {
+        if(fuseArmed == true)
+        {
+            return;
+        }
+
+        fuseArmed = true;
+        fuseRemain = fuseSeconds;
+
+        if(warning != null)
+        {
+            warning.StartWarning();
+        }
+    }
+
+    private void Update()
+    {
+        if(exploded == true)
+        {
+            return;
+        }
+
+        if(player == null)
         {
             return;
         }
 
         Vector3 myPos = transform.position;
         Vector3 toPlayer = player.position - myPos;
-        float dist = toPlayer.magnitude;    // 플레이어와의 현재 거리.
+        float dist = toPlayer.magnitude;
 
         if(dist <= detectDistance && fuseArmed == false)
         {
-            // 아직 퓨즈 시동이 가능한 거리보다 멀면 플레이어를 향해 이동.
             if(dist > fuseRadius)
             {
                 Vector3 dir = toPlayer.normalized;
@@ -89,70 +249,13 @@ public class SuicideBomber : MonoBehaviour
             fuseRemain -= Time.deltaTime;
             if(fuseRemain <= 0.0f)
             {
-                Explode();  // 퓨즈 시동 후 시간이 다 되면 폭발.
+                Explode();
             }
         }
 
         if(toPlayer.sqrMagnitude > 0.0001f)
         {
-            transform.up = Vector3.Slerp(transform.up, toPlayer.normalized, 10.0f * Time.deltaTime);
+            transform.up = Vector3.Slerp(transform.up, toPlayer.normalized, 12.0f * Time.deltaTime);
         }
-    }
-
-    /// <summary>
-    /// 퓨즈를 시동하고 카운트다운 시작.
-    /// </summary>
-    void ArmFuse()
-    {
-        if(fuseArmed == true)
-        {
-            return;
-        }
-
-        fuseArmed = true;
-        fuseRemain = fuseSeconds;
-    }
-
-    /// <summary>
-    /// 폭발.
-    /// </summary>
-    void Explode()
-    {
-        if(exploded == true)
-        {
-            return;
-        }
-
-        exploded = true;
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explodeRadius, targetLayer);
-        if(hits != null)
-        {
-            for(int i=0; i<hits.Length; ++i)
-            {
-                if (hits[i] == null)
-                {
-                    continue;
-                }
-
-                IDamageable damageable = hits[i].GetComponent<IDamageable>();
-                if(damageable != null)
-                {
-                    damageable.ApplyDamage(explosionDamage);
-                }
-            }
-        }
-
-        Destroy(gameObject);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // 폭발 반경.
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explodeRadius);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, fuseRadius);
     }
 }

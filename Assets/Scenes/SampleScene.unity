@@ -2093,7 +2093,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636295846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 088cc3794192e1042988c194d400c5b4, type: 3}
   m_Name: 
@@ -6164,8 +6164,6 @@ MonoBehaviour:
   - {fileID: 1494741693}
   - {fileID: 2144717995}
   enemyPrefabs:
-  - {fileID: 7548560821087048553, guid: acc9ab0043c2a764083306e443d4a377, type: 3}
-  - {fileID: 7548560821087048553, guid: de42d9843ff7b044e8819cf5eb2d4bd6, type: 3}
   - {fileID: 7548560821087048553, guid: b200ba3019173f14d89db0d29217737c, type: 3}
   minPlayerDistance: 3
   timeBetweenWaves: 15
@@ -6181,7 +6179,7 @@ MonoBehaviour:
   eventLog: {fileID: 0}
   aliveRegistry: {fileID: 939453192}
   safeSpawnRingProvider: {fileID: 1888198569}
-  enemyPrefabWeight: 050000000300000002000000
+  enemyPrefabWeight: 0a000000
 --- !u!4 &1868304867
 Transform:
   m_ObjectHideFlags: 0
