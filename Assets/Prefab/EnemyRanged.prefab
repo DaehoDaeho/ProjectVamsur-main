@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: -2475614288321344860}
   - component: {fileID: -5167925115363078673}
   - component: {fileID: -328330420418427111}
+  - component: {fileID: 8101286032366549655}
+  - component: {fileID: 7133911243979523980}
   m_Layer: 6
   m_Name: EnemyRanged
   m_TagString: Enemy
@@ -87,8 +89,8 @@ SpriteRenderer:
   m_SortingLayerID: 743354565
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.8520417, a: 1}
+  m_Sprite: {fileID: -6367560908665664636, guid: d348dff3819df794186a80cb95777629, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,7 +134,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.02}
   m_Radius: 0.5
 --- !u!50 &6578451159817030283
 Rigidbody2D:
@@ -179,6 +181,7 @@ MonoBehaviour:
   drop: {fileID: 7891522295332296041}
   currentHealth: 0
   resistance: 0.1
+  animController: {fileID: 8101286032366549655}
 --- !u!114 &4946445391724275329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +281,8 @@ MonoBehaviour:
   minDistance: 5
   maxDistance: 8
   rotateLerp: 12
+  animController: {fileID: 8101286032366549655}
+  sr: {fileID: 9144629756859964607}
 --- !u!114 &-328330420418427111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,3 +300,41 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8451299626861950299, guid: 64c72c0a921dfe14984c2b2f654c9a0b, type: 3}
   fireRange: 7
   fireCooldown: 3
+  projectileKey: ProjectileEnemy
+--- !u!114 &8101286032366549655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266faf686ff349346880ae1c4d69d432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7133911243979523980}
+  idleOrMoveParameter: Move
+  deathParameter: Death
+--- !u!95 &7133911243979523980
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90abd135a971ddb46a99b532eae6a2f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

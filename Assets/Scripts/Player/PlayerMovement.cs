@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 knockbackVelocity;
     public float knockbackDamping = 8.0f;
 
+    public AnimationController animController;
+    public SpriteRenderer sr;
+
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +41,13 @@ public class PlayerMovement : MonoBehaviour
         {
             inputDirection = Vector2.zero;
         }
+
+        if(animController != null)
+        {
+            animController.PlayIdleOrMove(inputDirection.magnitude);
+        }
+
+        UpdateDirection();
     }
 
     private void FixedUpdate()
@@ -72,5 +82,20 @@ public class PlayerMovement : MonoBehaviour
     public void AddKnockback(Vector2 force)
     {
         knockbackVelocity += force;
+    }
+
+    void UpdateDirection()
+    {
+        if(sr != null)
+        {
+            if(inputDirection.x > 0.0f)
+            {
+                sr.flipX = false;
+            }
+            else if(inputDirection.x < 0.0f)
+            {
+                sr.flipX = true;
+            }
+        }
     }
 }

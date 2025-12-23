@@ -21,6 +21,12 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField]
     private float rotateLerp = 12.0f;   // 회전 보간 속도. 값이 클수록 빨리 회전.
 
+    [SerializeField]
+    private AnimationController animController;
+
+    [SerializeField]
+    private SpriteRenderer sr;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -58,14 +64,36 @@ public class RangedEnemyAI : MonoBehaviour
         {
             float step = moveSpeed * Time.deltaTime;    // 이동량 계산.
             transform.position = pos + moveDir * step;
+
+            if(animController != null)
+            {
+                animController.PlayIdleOrMove(step);
+            }
         }
 
         // 플레이어를 향해서 부드럽게 회전 보간.
-        if(toPlayer.sqrMagnitude > 0.0001f)
+        //if(toPlayer.sqrMagnitude > 0.0001f)
+        //{
+        //    Vector3 targetUp = toPlayer.normalized;
+        //    Vector3 newUp = Vector3.Slerp(transform.up, targetUp, rotateLerp * Time.deltaTime);
+        //    transform.up = newUp;
+        //}
+
+        UpdateDirection(moveDir.x);
+    }
+
+    void UpdateDirection(float dir)
+    {
+        if (sr != null)
         {
-            Vector3 targetUp = toPlayer.normalized;
-            Vector3 newUp = Vector3.Slerp(transform.up, targetUp, rotateLerp * Time.deltaTime);
-            transform.up = newUp;
+            if (dir < 0.0f)
+            {
+                sr.flipX = true;
+            }
+            else if (dir > 0.0f)
+            {
+                sr.flipX = false;
+            }
         }
     }
 }

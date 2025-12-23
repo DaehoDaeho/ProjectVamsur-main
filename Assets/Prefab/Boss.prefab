@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 4840274940059629415}
   - component: {fileID: 3465388768384233528}
   - component: {fileID: -5670968222749394798}
+  - component: {fileID: 3451060820273326967}
   m_Layer: 6
   m_Name: Boss
   m_TagString: Enemy
@@ -418,6 +419,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5201912429525850775}
   hitFlashTime: 0.05
   drop: {fileID: 0}
+  currentHealth: 0
   resistance: 0.1
 --- !u!58 &4840274940059629415
 CircleCollider2D:
@@ -498,6 +500,21 @@ MonoBehaviour:
   target: {fileID: 0}
   body: {fileID: 3465388768384233528}
   stopDistance: 2
+--- !u!114 &3451060820273326967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817803834926060983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266faf686ff349346880ae1c4d69d432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  idleOrMoveParameter: Move
+  deathParameter: Death
 --- !u!1 &8241458247435454028
 GameObject:
   m_ObjectHideFlags: 0

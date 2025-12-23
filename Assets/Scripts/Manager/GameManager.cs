@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -133,10 +134,17 @@ public class GameManager : MonoBehaviour
 
         isPlaying = false;
 
+        StartCoroutine(CoHandleGameOver());
+    }
+
+    IEnumerator CoHandleGameOver()
+    {
+        yield return new WaitForSeconds(2.0f);
+
         // GameOver UI 표시.
         // 재시작 버튼 노출.
         // 데이터 정리.
-        if(uiManager != null)
+        if (uiManager != null)
         {
             uiManager.OpenGameOver();
         }
@@ -146,6 +154,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Game Over");
     }
+
 
     public void HandleGameClear()
     {

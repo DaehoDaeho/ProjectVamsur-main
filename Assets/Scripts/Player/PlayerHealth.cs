@@ -31,6 +31,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
     [SerializeField]
     private GameManager gameManager;
 
+    [SerializeField]
+    private AnimationController animController;
+
     void Awake()
     {
         currentHealth = maxHealth;
@@ -62,6 +65,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
             {
                 return;
             }
+        }
+
+        if(currentHealth <= 0.0f)
+        {
+            return;
         }
 
         if(amount <= 0.0f)
@@ -106,6 +114,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
 
     void HandleDeath()
     {
+        if(animController != null)
+        {
+            animController.PlayDeath();
+        }
+
         if(gameManager != null)
         {
             //gameManager.HandleGameClear();

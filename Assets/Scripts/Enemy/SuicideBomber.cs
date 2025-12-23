@@ -48,6 +48,12 @@ public class SuicideBomber : MonoBehaviour
     [SerializeField]
     private float chainFuseSeconds = 0.4f;
 
+    [SerializeField]
+    private AnimationController animController;
+
+    [SerializeField]
+    private SpriteRenderer sr;
+
     private bool fuseArmed; //  퓨즈 시동 중인지 여부.
     private float fuseRemain;   // 퓨즈 타이머 변수.
     private bool exploded;  // 폭발 했는지 여부.
@@ -237,6 +243,13 @@ public class SuicideBomber : MonoBehaviour
                 Vector3 dir = toPlayer.normalized;
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = myPos + dir * step;
+
+                if(animController != null)
+                {
+                    animController.PlayIdleOrMove(step);
+                }
+
+                UpdateDirection(dir.x);
             }
             else
             {
@@ -253,9 +266,24 @@ public class SuicideBomber : MonoBehaviour
             }
         }
 
-        if(toPlayer.sqrMagnitude > 0.0001f)
+        //if(toPlayer.sqrMagnitude > 0.0001f)
+        //{
+        //    transform.up = Vector3.Slerp(transform.up, toPlayer.normalized, 12.0f * Time.deltaTime);
+        //}
+    }
+
+    void UpdateDirection(float dir)
+    {
+        if (sr != null)
         {
-            transform.up = Vector3.Slerp(transform.up, toPlayer.normalized, 12.0f * Time.deltaTime);
+            if (dir < 0.0f)
+            {
+                sr.flipX = true;
+            }
+            else if (dir > 0.0f)
+            {
+                sr.flipX = false;
+            }
         }
     }
 }

@@ -22,6 +22,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
     [SerializeField, Range(0.0f, 0.9f)]
     private float resistance = 0.1f; // 피해 저항
 
+    [SerializeField]
+    private AnimationController animController;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -55,6 +58,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
 
     public void ApplyDamage(float amount)
     {
+        if(currentHealth <= 0.0f)
+        {
+            return;
+        }
+
         HitContext context; // 사용할 문맥
         if (hasLastContext == true)
         {
@@ -101,14 +109,19 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
         deathEvent.victim = transform;
         EventBus.PublishDeath(deathEvent);
 
-        Destroy(gameObject);
+        if(animController != null)
+        {
+            animController.PlayDeath();
+        }
+
+        Destroy(gameObject, 2.0f);
     }
 
     void PlayHitFlash()
     {
         if(spriteRenderer != null)
         {
-            spriteRenderer.color = Color.white;
+            spriteRenderer.color = Color.red;
             //hitFlashTimer = hitFlashTime;
             hitFlashTimer = 0.0f;
         }

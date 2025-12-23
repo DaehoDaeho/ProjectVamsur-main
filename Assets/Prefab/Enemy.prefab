@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 8998877726221401307}
   - component: {fileID: 4779822091999214073}
   - component: {fileID: -2475614288321344860}
+  - component: {fileID: -7501333469951662921}
+  - component: {fileID: 5614986999745199587}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -85,10 +87,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 743354565
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5783197, g: 0.6476504, b: 0.7169812, a: 1}
+  m_Sprite: {fileID: -6367560908665664636, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,7 +134,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.08}
   m_Radius: 0.5
 --- !u!50 &6578451159817030283
 Rigidbody2D:
@@ -177,6 +179,8 @@ MonoBehaviour:
   target: {fileID: 0}
   body: {fileID: 6578451159817030283}
   stopDistance: 1
+  animController: {fileID: -7501333469951662921}
+  sr: {fileID: 9144629756859964607}
 --- !u!114 &2688157544576316923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +197,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 9144629756859964607}
   hitFlashTime: 0.05
   drop: {fileID: 7891522295332296041}
+  currentHealth: 0
   resistance: 0.1
+  animController: {fileID: -7501333469951662921}
 --- !u!114 &4946445391724275329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,3 +297,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveRegistry: {fileID: 0}
+--- !u!114 &-7501333469951662921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266faf686ff349346880ae1c4d69d432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5614986999745199587}
+  idleOrMoveParameter: Move
+  deathParameter: Death
+--- !u!95 &5614986999745199587
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548560821087048553}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c497ce54d3c3774ba20289816ae6a23, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

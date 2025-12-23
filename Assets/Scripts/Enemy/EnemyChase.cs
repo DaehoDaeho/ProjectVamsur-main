@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EnemyChase : MonoBehaviour
@@ -6,6 +7,9 @@ public class EnemyChase : MonoBehaviour
     public Transform target;
     public Rigidbody2D body;    
     public float stopDistance = 1.0f;
+
+    public AnimationController animController;
+    public SpriteRenderer sr;
 
     private GameManager gameManager;
 
@@ -59,6 +63,13 @@ public class EnemyChase : MonoBehaviour
         Vector2 current = body.position;
         Vector2 next = current + (dir * moveSpeed * Time.fixedDeltaTime);
         body.MovePosition(next);
+
+        if(animController != null)
+        {
+            animController.PlayIdleOrMove(toTarget.magnitude);
+        }
+
+        UpdateDirection(dir.x);
     }
 
     public void SetTarget(Transform newTarget)
@@ -74,5 +85,20 @@ public class EnemyChase : MonoBehaviour
     public float GetMoveSpeed()
     {
         return moveSpeed;
+    }
+
+    void UpdateDirection(float dir)
+    {
+        if(sr != null)
+        {
+            if (dir < 0.0f)
+            {
+                sr.flipX = true;
+            }
+            else if(dir > 0.0f)
+            {
+                sr.flipX = false;
+            }
+        }
     }
 }
