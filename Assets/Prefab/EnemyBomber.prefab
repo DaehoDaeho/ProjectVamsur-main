@@ -296,6 +296,7 @@ MonoBehaviour:
   chainFuseSeconds: 0.4
   animController: {fileID: 2607980523724026991}
   sr: {fileID: 9144629756859964607}
+  enemyHealth: {fileID: 2688157544576316923}
 --- !u!114 &2607980523724026991
 MonoBehaviour:
   m_ObjectHideFlags: 0

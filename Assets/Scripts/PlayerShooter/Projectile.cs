@@ -28,11 +28,21 @@ public class Projectile : MonoBehaviour
 
     public string targetTag = "Enemy";
 
+    [SerializeField]
+    private int pierceCount = 0;
+
     private PooledObject pooled;
+
+    private int remainPierce;   // 현재 남아있는 관통 카운트.
 
     private void Awake()
     {
         pooled = GetComponent<PooledObject>();
+    }
+
+    private void OnEnable()
+    {
+        remainPierce = pierceCount;
     }
 
     // Update is called once per frame
@@ -69,35 +79,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        //DamageRouter router = collision.GetComponent<DamageRouter>();
-        //if (router != null)
-        //{
-        //    DamageContext ctx = new DamageContext();
-        //    ctx.baseDamage = damage;
-        //    ctx.canCrit = canCrit;
-        //    ctx.critChance = critChance;
-        //    ctx.critMultiplier = critMultiplier;
-        //    ctx.knockbackForce = knockbackForce;
-        //    ctx.applyBurn = applyBurn;
-        //    ctx.burnDps = burnDps;
-        //    ctx.burnDuration = burnDuration;
-        //    ctx.applyFreeze = applyFreeze;
-        //    ctx.freezeSlowPercent = freezeSlowPercent;
-        //    ctx.freezeDuration = freezeDuration;
-        //    ctx.attacker = owner != null ? owner : gameObject;
-
-        //    router.Receive(ctx);
-
-        //    if (pooled != null)
-        //    {
-        //        pooled.Release();
-        //        return;
-        //    }
-
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
         Transform attacker = transform; // 가해자 변환
         Transform target = collision.transform; // 피격자 변환
         Vector3 pos = collision.bounds.center; // 피격 위치
@@ -118,13 +99,20 @@ public class Projectile : MonoBehaviour
             damageable.ApplyDamage(damage);
         }
 
-        if (pooled != null)
+        if(remainPierce <= 0)
         {
-            pooled.Release();
-            return;
-        }
+            if (pooled != null)
+            {
+                pooled.Release();
+                return;
+            }
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+        else
+        {
+            --remainPierce;
+        }
     }
 
     // --- �ű� Setter��(���⿡�� ����) ---

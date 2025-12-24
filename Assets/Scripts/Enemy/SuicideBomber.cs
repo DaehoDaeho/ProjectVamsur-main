@@ -54,6 +54,9 @@ public class SuicideBomber : MonoBehaviour
     [SerializeField]
     private SpriteRenderer sr;
 
+    [SerializeField]
+    private EnemyHealth enemyHealth;
+
     private bool fuseArmed; //  퓨즈 시동 중인지 여부.
     private float fuseRemain;   // 퓨즈 타이머 변수.
     private bool exploded;  // 폭발 했는지 여부.
@@ -230,6 +233,14 @@ public class SuicideBomber : MonoBehaviour
         if(player == null)
         {
             return;
+        }
+
+        if (enemyHealth != null)
+        {
+            if (enemyHealth.GetCurrentHealth() <= 0.0f)
+            {
+                return;
+            }
         }
 
         Vector3 myPos = transform.position;

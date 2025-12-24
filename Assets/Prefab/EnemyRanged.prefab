@@ -283,6 +283,7 @@ MonoBehaviour:
   rotateLerp: 12
   animController: {fileID: 8101286032366549655}
   sr: {fileID: 9144629756859964607}
+  enemyHealth: {fileID: 2688157544576316923}
 --- !u!114 &-328330420418427111
 MonoBehaviour:
   m_ObjectHideFlags: 0

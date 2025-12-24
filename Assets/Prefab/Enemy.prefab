@@ -181,6 +181,7 @@ MonoBehaviour:
   stopDistance: 1
   animController: {fileID: -7501333469951662921}
   sr: {fileID: 9144629756859964607}
+  enemyHealth: {fileID: 2688157544576316923}
 --- !u!114 &2688157544576316923
 MonoBehaviour:
   m_ObjectHideFlags: 0

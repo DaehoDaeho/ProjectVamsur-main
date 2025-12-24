@@ -27,6 +27,9 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField]
     private SpriteRenderer sr;
 
+    [SerializeField]
+    private EnemyHealth enemyHealth;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,6 +46,14 @@ public class RangedEnemyAI : MonoBehaviour
         if(player == null)
         {
             return;
+        }
+
+        if (enemyHealth != null)
+        {
+            if (enemyHealth.GetCurrentHealth() <= 0.0f)
+            {
+                return;
+            }
         }
 
         Vector3 pos = transform.position;

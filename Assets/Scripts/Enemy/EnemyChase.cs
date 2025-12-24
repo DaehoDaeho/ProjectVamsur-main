@@ -11,6 +11,8 @@ public class EnemyChase : MonoBehaviour
     public AnimationController animController;
     public SpriteRenderer sr;
 
+    public EnemyHealth enemyHealth;
+
     private GameManager gameManager;
 
     private void Awake()
@@ -33,6 +35,14 @@ public class EnemyChase : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(enemyHealth != null)
+        {
+            if(enemyHealth.GetCurrentHealth() <= 0.0f)
+            {
+                return;
+            }
+        }
+
         bool canMove = false;
         if (gameManager != null)
         {
