@@ -11,7 +11,6 @@ public class Projectile : MonoBehaviour
 
     private float elapsed;
 
-    // �ű�: ���� �Ķ����
     public bool canCrit;
     public float critChance;
     public float critMultiplier = 2.0f;
@@ -60,7 +59,6 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            // ������ (0, 0)�� ��쿡�� ����Ʈ�� ������ �������� ����
             moveDirection = Vector2.right;
         }
     }
@@ -115,7 +113,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    // --- �ű� Setter��(���⿡�� ����) ---
     public void SetOwner(GameObject obj)
     {
         owner = obj;
