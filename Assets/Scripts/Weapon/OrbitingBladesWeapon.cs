@@ -9,6 +9,8 @@ using System.Collections.Generic;
 /// </summary>
 public class OrbitingBladesWeapon : MonoBehaviour
 {
+    [SerializeField] private PlayerWeaponStatsRuntime stats;
+
     [SerializeField] private GameObject bladePrefab;
 
     [SerializeField] private int bladeCount = 5;    // 생성할 칼날 개수.
@@ -25,32 +27,27 @@ public class OrbitingBladesWeapon : MonoBehaviour
     {
         blades.Clear();
         lastHitTimeByTargetId.Clear();
-
-        for(int i=0; i<bladeCount; ++i)
-        {
-            GameObject blade = Instantiate(bladePrefab, transform.position, Quaternion.identity);
-            if(blade != null)
-            {
-                blade.transform.SetParent(transform, true);
-
-                BladeHitReceiver receiver = blade.GetComponent<BladeHitReceiver>();
-                if(receiver != null)
-                {
-                    receiver.Setup(this);
-                }
-
-                blades.Add(blade.transform);
-            }
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(blades == null || blades.Count == 0)
+        if(stats == null)
         {
             return;
         }
+
+        int targetCount = stats.GetBladeCount();
+
+        EnsureBladeCount(targetCount);
+
+        if(blades.Count <= 0)
+        {
+            return;
+        }
+
+        rotationSpeedDeg = stats.GetBladeRotationSpeedDeg();
+        radius = stats.GetBladeRadius();
 
         float baseAngle = Time.time * rotationSpeedDeg;
         float step = 360.0f / blades.Count;
@@ -74,6 +71,13 @@ public class OrbitingBladesWeapon : MonoBehaviour
 
     public void TryDealDamage(EnemyHealth enemyHealth)
     {
+        if(stats == null)
+        {
+            return;
+        }
+
+        hitCooldownSec = stats.GetBladeHitCooldownSec();
+
         Transform trans = enemyHealth.transform;
         float now = Time.time;  // 현재 시간을 저장.
         float lastTime;
@@ -88,6 +92,55 @@ public class OrbitingBladesWeapon : MonoBehaviour
         }
 
         lastHitTimeByTargetId[trans] = now;
+
+        damage = stats.GetBladeDamage();
         enemyHealth.ApplyDamage(damage);
+    }
+
+    /// <summary>
+    /// 칼날의 개수를 목표 개수로 맞춘다.
+    /// 부족하면 추가 생성하고, 많으면 제거한다.
+    /// </summary>
+    /// <param name="targetCount"></param>
+    void EnsureBladeCount(int targetCount)
+    {
+        if(targetCount == blades.Count)
+        {
+            return;
+        }
+
+        if(targetCount < blades.Count)
+        {
+            for(int i=blades.Count-1; i>=targetCount; --i)
+            {
+                Transform t = blades[i];
+                blades.RemoveAt(i);
+
+                if(t != null)
+                {
+                    Destroy(t.gameObject);
+                }
+            }
+
+            return;
+        }
+
+        int need = targetCount - blades.Count;
+        for (int i = 0; i < need; ++i)
+        {
+            GameObject blade = Instantiate(bladePrefab, transform.position, Quaternion.identity);
+            if (blade != null)
+            {
+                blade.transform.SetParent(transform, true);
+
+                BladeHitReceiver receiver = blade.GetComponent<BladeHitReceiver>();
+                if (receiver != null)
+                {
+                    receiver.Setup(this);
+                }
+
+                blades.Add(blade.transform);
+            }
+        }
     }
 }

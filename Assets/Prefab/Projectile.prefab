@@ -119,8 +119,8 @@ MonoBehaviour:
   owner: {fileID: 0}
   damageType: 0
   targetTag: Enemy
-  pierceCount: 1
-  hitCooldownSec: 0.2
+  pierceCount: 0
+  stats: {fileID: 0}
 --- !u!58 &4147348233978342179
 CircleCollider2D:
   m_ObjectHideFlags: 0

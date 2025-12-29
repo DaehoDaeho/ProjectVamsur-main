@@ -171,6 +171,72 @@ MonoBehaviour:
   label: {fileID: 912996726}
   canvasGroup: {fileID: 912996725}
   fadeOutTime: 0.5
+--- !u!1 &200915645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200915647}
+  - component: {fileID: 200915646}
+  - component: {fileID: 200915648}
+  m_Layer: 0
+  m_Name: PlayerWeaponStatsRuntime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &200915646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200915645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd095637e97da34e83d303e0cb420ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPierceCount: 0
+  bulletDamage: 1
+  bulletHitCooldownSec: 0.15
+  bladeCount: 3
+  bladeRadius: 2
+  bladeRotationSpeedDeg: 180
+  bladeDamage: 1
+  bladeHitCooldownSec: 0.2
+--- !u!4 &200915647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200915645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7898764, y: 0.1013946, z: -0.0049696006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200915648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200915645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff244259fe7e56c4c87ca8d32fd3311b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 200915646}
 --- !u!1 &229616416
 GameObject:
   m_ObjectHideFlags: 0
@@ -4146,6 +4212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e0f7c72bfd1624fb4efaef1dd15b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 200915646}
   bladePrefab: {fileID: 7540538995975907582, guid: d1e2e831a3d7c1c49a93bc653a2a7324, type: 3}
   bladeCount: 10
   radius: 2
@@ -6648,3 +6715,4 @@ SceneRoots:
   - {fileID: 330501002}
   - {fileID: 1888198570}
   - {fileID: 1141909492}
+  - {fileID: 200915647}

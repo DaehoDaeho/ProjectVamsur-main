@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Projectile : MonoBehaviour
 {
@@ -34,14 +35,38 @@ public class Projectile : MonoBehaviour
 
     private int remainPierce;   // 현재 남아있는 관통 카운트.
 
+    [SerializeField]
+    private PlayerWeaponStatsRuntime stats; // 무기 강화 수치를 읽기 위한 참조 변수.
+
+    private Dictionary<Transform, float> lastTimeByTargetId;
+
     private void Awake()
     {
         pooled = GetComponent<PooledObject>();
     }
 
+    private void Start()
+    {
+        stats = GameObject.FindAnyObjectByType<PlayerWeaponStatsRuntime>();
+    }
+
     private void OnEnable()
     {
         remainPierce = pierceCount;
+
+        if(lastTimeByTargetId == null)
+        {
+            lastTimeByTargetId = new Dictionary<Transform, float>();
+        }
+        else
+        {
+            lastTimeByTargetId.Clear();
+        }
+
+        if(stats != null)
+        {
+            remainPierce = stats.GetBulletPierceCount();
+        }
     }
 
     // Update is called once per frame
@@ -77,6 +102,13 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+        if(stats == null)
+        {
+            return;
+        }
+
+        float damage = stats.GetBulletDamage();
+
         Transform attacker = transform; // 가해자 변환
         Transform target = collision.transform; // 피격자 변환
         Vector3 pos = collision.bounds.center; // 피격 위치
@@ -91,13 +123,37 @@ public class Projectile : MonoBehaviour
             ctxReceiver.SetHitContext(context); // 문맥 저장 요청
         }
 
-        IDamageable damageable = collision.GetComponent<IDamageable>();
-        if(damageable != null)
+        EnemyHealth damageable = collision.GetComponent<EnemyHealth>();
+        if(damageable == null)
         {
-            damageable.ApplyDamage(damage);
+            return;
         }
 
-        if(remainPierce <= 0)
+        //if(damageable != null)
+        //{
+        //    damageable.ApplyDamage(damage);
+        //}
+
+        Transform trans = damageable.transform;
+        float now = Time.time;
+
+        float cooldown = stats.GetBulletHitCooldownSec();
+        
+        if(lastTimeByTargetId.TryGetValue(trans, out float lastTime) == true)
+        {
+            float delta = now - lastTime;
+            if(delta < cooldown)
+            {
+                return;
+            }
+        }
+
+        lastTimeByTargetId[trans] = now;
+        damageable.ApplyDamage(damage);
+
+        --remainPierce;
+
+        if (remainPierce <= 0)
         {
             if (pooled != null)
             {
@@ -106,10 +162,6 @@ public class Projectile : MonoBehaviour
             }
 
             Destroy(gameObject);
-        }
-        else
-        {
-            --remainPierce;
         }
     }
 
