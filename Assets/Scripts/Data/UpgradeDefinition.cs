@@ -55,6 +55,21 @@ public class UpgradeDefinition : ScriptableObject
     [SerializeField]
     private float pickupRange = 0.0f;      // 경험치 흡수 범위 가산
 
+    [SerializeField]
+    private int bulletPierceDelta = 0;  // 총알의 관통 회수.
+
+    [SerializeField]
+    private float bulletDamageDelta = 0.0f; // 총알 대미지.
+
+    [SerializeField]
+    private int bladeCountDelta = 0;    // 칼날 개수.
+
+    [SerializeField]
+    private float bladeDamageDelta = 0.0f;  // 칼날의 대미지.
+
+    [SerializeField]
+    private float bladeRotationSpeedDegDelta = 0.0f;
+
     // ----- Getter들 -----
 
     public string GetId()
@@ -120,5 +135,30 @@ public class UpgradeDefinition : ScriptableObject
     public float GetPickupRange()
     {
         return pickupRange;
+    }
+
+    public int GetBulletPerceDelta()
+    {
+        return bulletPierceDelta;
+    }
+
+    public float GetBulletDamageDelta()
+    {
+        return bulletDamageDelta;
+    }
+
+    public int GetBladeCountDelta()
+    {
+        return bladeCountDelta;
+    }
+
+    public float GetBladeDamageDelta()
+    {
+        return bladeDamageDelta;
+    }
+
+    public float GetBladeRotationSpeedDegDelta()
+    {
+        return bladeRotationSpeedDegDelta;
     }
 }

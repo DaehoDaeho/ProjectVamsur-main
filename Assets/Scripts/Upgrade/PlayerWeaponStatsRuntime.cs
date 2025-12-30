@@ -16,6 +16,9 @@ public class PlayerWeaponStatsRuntime : MonoBehaviour
     [SerializeField] private float bladeRotationSpeedDeg = 180.0f;  // 칼날의 초당 회전 각도.
     [SerializeField] private float bladeDamage = 1.0f;  // 칼날의 대미지.
     [SerializeField] private float bladeHitCooldownSec = 0.2f;  // 대미지를 주는 쿨타임.
+    
+    [SerializeField] private float playerMoveSpeed = 5.0f;  // 플레이어의 이동 속도.
+    [SerializeField] private float playerDefend = 1.0f; // 플레이어의 방어력. 대미지 감소에 사용할 배율.
 
     public int GetBulletPierceCount()
     {

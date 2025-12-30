@@ -54,5 +54,19 @@ public static class UpgradeApplier
                 weapon.AddProjectileCountAll(def.GetProjectileCount());
             }
         }
+
+        PlayerWeaponStatsRuntime stats = GameObject.FindAnyObjectByType<PlayerWeaponStatsRuntime>();
+
+        if(stats != null)
+        {
+            int bulletPierceDelta = def.GetBulletPerceDelta();
+            float bulletDamageDelta = def.GetBulletDamageDelta();
+            stats.AddPierceBulletUpgrade(bulletPierceDelta, bulletDamageDelta);
+
+            int bladeCountDelta = def.GetBladeCountDelta();
+            float bladeDamageDelta = def.GetBladeDamageDelta();
+            float bladeRotationSpeedDelta = def.GetBladeRotationSpeedDegDelta();
+            stats.AddOrbitBladesUpgrade(bladeCountDelta, bladeDamageDelta, bladeRotationSpeedDelta);
+        }
     }
 }

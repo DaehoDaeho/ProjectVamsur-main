@@ -202,12 +202,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPierceCount: 0
-  bulletDamage: 1
+  bulletDamage: 10
   bulletHitCooldownSec: 0.15
   bladeCount: 3
   bladeRadius: 2
   bladeRotationSpeedDeg: 180
-  bladeDamage: 1
+  bladeDamage: 5
   bladeHitCooldownSec: 0.2
 --- !u!4 &200915647
 Transform:
@@ -4737,6 +4737,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc7fa19201845ea449f80d16198c037f, type: 2}
   - {fileID: 11400000, guid: 7a86a72fb76014044a1b8616ff446567, type: 2}
   - {fileID: 11400000, guid: f62bc62aa59e4d44f902fe3180429fda, type: 2}
+  - {fileID: 11400000, guid: 9788bc6db53a2b043a99eb9b5db8059a, type: 2}
+  - {fileID: 11400000, guid: 7bc3fec400479fa4c8cacd286956f118, type: 2}
+  - {fileID: 11400000, guid: 06cbc046515e29b4390f6935639514e4, type: 2}
+  - {fileID: 11400000, guid: 8d63df8c83a20d949ad2932a53776d68, type: 2}
+  - {fileID: 11400000, guid: 8b6f2b27932fd8c40904c4265ac0e648, type: 2}
   rarityCurves: {fileID: 1394328979}
   pity: {fileID: 1394328978}
   synergy: {fileID: 1394328977}
