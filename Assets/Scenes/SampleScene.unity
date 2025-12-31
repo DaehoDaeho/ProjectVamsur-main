@@ -209,6 +209,8 @@ MonoBehaviour:
   bladeRotationSpeedDeg: 180
   bladeDamage: 5
   bladeHitCooldownSec: 0.2
+  playerMoveSpeed: 5
+  playerDefend: 1
 --- !u!4 &200915647
 Transform:
   m_ObjectHideFlags: 0
@@ -3848,6 +3850,7 @@ GameObject:
   - component: {fileID: 1289999631}
   - component: {fileID: 1289999632}
   - component: {fileID: 1289999633}
+  - component: {fileID: 1289999634}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4219,6 +4222,31 @@ MonoBehaviour:
   rotationSpeedDeg: 270
   damage: 5
   hitCooldownSec: 0.2
+--- !u!114 &1289999634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289999614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2fe99ba9114364b91a0f62d9ae7eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpriteRenderer: {fileID: 1289999617}
+  body: {fileID: 1289999616}
+  movementScriptToDisable: {fileID: 1289999615}
+  dashKey: 306
+  dashSpeed: 15
+  dashDurationSec: 0.2
+  dashCooldownSec: 0.5
+  allowVerticalDash: 1
+  afterImagePrefab: {fileID: 3615685702424356536, guid: 3421956ea38b88e46a78f00ebf378b03, type: 3}
+  afterImageIntervalSec: 0.05
+  afterImageLifeSec: 0.15
+  afterImageStartAlpha: 1
+  afterImageEndAlpha: 0
 --- !u!1 &1294027113
 GameObject:
   m_ObjectHideFlags: 0
