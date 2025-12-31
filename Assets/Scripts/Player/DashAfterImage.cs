@@ -13,7 +13,7 @@ public class DashAfterImage : MonoBehaviour
 
     public void Initialize(Sprite sprite, bool flipX, bool flipY, string sortingLayerName, int sortingOrder, float durationSec, float fromAlpha, float toAlpha)
     {
-        if(spriteRenderer)
+        if(spriteRenderer == null)
         {
             return;
         }

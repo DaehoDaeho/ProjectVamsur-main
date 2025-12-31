@@ -247,7 +247,6 @@ public class PlayerDash : MonoBehaviour
 
         img.gameObject.SetActive(true);
 
-        img.Initialize(sprite, flipX, flipY, layerName, order, afterImageLifeSec, afterImageStartAlpha, afterImageEndAlpha);
-        
+        img.Initialize(sprite, flipX, flipY, layerName, order, afterImageLifeSec, afterImageStartAlpha, afterImageEndAlpha);        
     }
 }
