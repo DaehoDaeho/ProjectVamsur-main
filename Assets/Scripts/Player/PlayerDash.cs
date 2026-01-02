@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class PlayerDash : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class PlayerDash : MonoBehaviour
     private float afterImageNextSpawnTime;
 
     private List<DashAfterImage> afterImagePool = new List<DashAfterImage>();
+
+    public event Action OnDashStarted;
 
     public bool IsDashing()
     {
@@ -116,6 +119,11 @@ public class PlayerDash : MonoBehaviour
         if(body != null)
         {
             body.linearVelocity = dashDirection * dashSpeed;
+        }
+
+        if(OnDashStarted != null)
+        {
+            OnDashStarted.Invoke();
         }
     }
 

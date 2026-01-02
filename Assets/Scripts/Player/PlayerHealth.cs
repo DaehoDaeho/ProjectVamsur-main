@@ -34,6 +34,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
     [SerializeField]
     private AnimationController animController;
 
+    [SerializeField]
+    private PlayerDash playerDash;
+
     void Awake()
     {
         currentHealth = maxHealth;
@@ -78,6 +81,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRecover
         }
 
         if(invulnerableTimer > 0.0f)
+        {
+            return;
+        }
+
+        if(playerDash != null && playerDash.IsDashing() == true)
         {
             return;
         }

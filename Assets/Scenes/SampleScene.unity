@@ -3851,6 +3851,7 @@ GameObject:
   - component: {fileID: 1289999632}
   - component: {fileID: 1289999633}
   - component: {fileID: 1289999634}
+  - component: {fileID: 1289999635}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4020,6 +4021,7 @@ MonoBehaviour:
   knockbackDamper: 0.9
   gameManager: {fileID: 326995743}
   animController: {fileID: 1289999631}
+  playerDash: {fileID: 1289999634}
 --- !u!61 &1289999621
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4247,6 +4249,26 @@ MonoBehaviour:
   afterImageLifeSec: 0.15
   afterImageStartAlpha: 1
   afterImageEndAlpha: 0
+--- !u!114 &1289999635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289999614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e8b221182032b469256c22961e7086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDash: {fileID: 1289999634}
+  radius: 2
+  damage: 50
+  hitCooldownSec: 0.15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  bufferSize: 32
 --- !u!1 &1294027113
 GameObject:
   m_ObjectHideFlags: 0

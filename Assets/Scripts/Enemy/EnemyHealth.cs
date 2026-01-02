@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitContext
@@ -24,6 +25,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
 
     [SerializeField]
     private AnimationController animController;
+
+    public event Action<float, float> OnChangedHP;
 
     private void Awake()
     {
@@ -86,6 +89,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IRecover, IReceivesHitCon
         e.finalDamage = finalDamage; // 최종 피해
         e.remainingHp = currentHealth; // 남은 체력
         EventBus.PublishDamageApplied(e); // 피해확정 알림 발행
+
+        if(OnChangedHP != null)
+        {
+            OnChangedHP.Invoke(currentHealth, maxHealth);
+        }
 
         if (currentHealth <= 0.0f)
         {
