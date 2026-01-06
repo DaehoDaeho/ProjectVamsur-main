@@ -209,8 +209,12 @@ MonoBehaviour:
   bladeRotationSpeedDeg: 180
   bladeDamage: 5
   bladeHitCooldownSec: 0.2
-  playerMoveSpeed: 5
-  playerDefend: 1
+  dashDurationSec: 0.2
+  dashDamage: 5
+  dashSpeed: 15
+  boomerangDamage: 5
+  boomerangMaxDistance: 6
+  boomerangSpeed: 10
 --- !u!4 &200915647
 Transform:
   m_ObjectHideFlags: 0
@@ -1196,6 +1200,7 @@ MonoBehaviour:
     m_Bits: 64
   aimRange: 8
   spreadDeg: 16
+  stats: {fileID: 200915646}
 --- !u!1 &427422615
 GameObject:
   m_ObjectHideFlags: 0
@@ -4307,6 +4312,7 @@ MonoBehaviour:
   afterImageLifeSec: 0.15
   afterImageStartAlpha: 1
   afterImageEndAlpha: 0
+  stats: {fileID: 200915646}
 --- !u!114 &1289999635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4321,12 +4327,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDash: {fileID: 1289999634}
   radius: 2
-  damage: 50
+  damage: 5
   hitCooldownSec: 0.15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   bufferSize: 32
+  stats: {fileID: 200915646}
 --- !u!1 &1294027113
 GameObject:
   m_ObjectHideFlags: 0
@@ -4850,6 +4857,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 06cbc046515e29b4390f6935639514e4, type: 2}
   - {fileID: 11400000, guid: 8d63df8c83a20d949ad2932a53776d68, type: 2}
   - {fileID: 11400000, guid: 8b6f2b27932fd8c40904c4265ac0e648, type: 2}
+  - {fileID: 11400000, guid: a2ced731db9945043bbf686815544195, type: 2}
+  - {fileID: 11400000, guid: d4be433cd01bd0f4f9a15ecda3668c5f, type: 2}
+  - {fileID: 11400000, guid: a3a4b1a795664874792165d3052eeff1, type: 2}
+  - {fileID: 11400000, guid: 590f8966bc9fcd54d8c8cbe4bf1e5447, type: 2}
+  - {fileID: 11400000, guid: 3d893106dd0803d4a8320d24a28d8367, type: 2}
+  - {fileID: 11400000, guid: f91a9394ce2c17e4495fcaa9aaed1c0d, type: 2}
   rarityCurves: {fileID: 1394328979}
   pity: {fileID: 1394328978}
   synergy: {fileID: 1394328977}

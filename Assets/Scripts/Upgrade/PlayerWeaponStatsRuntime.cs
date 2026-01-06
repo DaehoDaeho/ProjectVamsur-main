@@ -16,9 +16,14 @@ public class PlayerWeaponStatsRuntime : MonoBehaviour
     [SerializeField] private float bladeRotationSpeedDeg = 180.0f;  // 칼날의 초당 회전 각도.
     [SerializeField] private float bladeDamage = 1.0f;  // 칼날의 대미지.
     [SerializeField] private float bladeHitCooldownSec = 0.2f;  // 대미지를 주는 쿨타임.
-    
-    [SerializeField] private float playerMoveSpeed = 5.0f;  // 플레이어의 이동 속도.
-    [SerializeField] private float playerDefend = 1.0f; // 플레이어의 방어력. 대미지 감소에 사용할 배율.
+
+    [SerializeField] private float dashDurationSec = 0.2f;  // 대쉬 지속시간.
+    [SerializeField] private float dashDamage = 5.0f;   // 대쉬 대미지.
+    [SerializeField] private float dashSpeed = 15.0f;   // 대쉬 속도.
+
+    [SerializeField] private float boomerangDamage = 5.0f;  // 부메랑 대미지.
+    [SerializeField] private float boomerangMaxDistance = 6.0f; // 부메랑 사정거리.
+    [SerializeField] private float boomerangSpeed = 10.0f;  // 부메랑 속도.
 
     public int GetBulletPierceCount()
     {
@@ -60,6 +65,36 @@ public class PlayerWeaponStatsRuntime : MonoBehaviour
         return bladeHitCooldownSec;
     }
 
+    public float GetDashDurationSec()
+    {
+        return dashDurationSec;
+    }
+
+    public float GetDashDamage()
+    {
+        return dashDamage;
+    }
+
+    public float GetDashSpeed()
+    {
+        return dashSpeed;
+    }
+
+    public float GetBoomerangDamage()
+    {
+        return boomerangDamage;
+    }
+
+    public float GetBoomerangMaxDistance()
+    {
+        return boomerangMaxDistance;
+    }
+
+    public float GetBoomerangSpeed()
+    {
+        return boomerangSpeed;
+    }
+
     /// <summary>
     /// 관통 회수와 대미지를 더한다.
     /// </summary>
@@ -69,9 +104,6 @@ public class PlayerWeaponStatsRuntime : MonoBehaviour
     {
         bulletPierceCount += pierceDelta;
         bulletDamage += damageDelta;
-
-        Debug.Log("bulletPierceCount: " + bulletPierceCount);
-        Debug.Log("bulletDamage: " + bulletDamage);
     }
 
     /// <summary>
@@ -85,9 +117,19 @@ public class PlayerWeaponStatsRuntime : MonoBehaviour
         bladeCount += countDelta;
         bladeDamage += damageDelta;
         bladeRotationSpeedDeg += rotationSpeedDelta;
+    }
 
-        Debug.Log("bladeCount: " + bladeCount);
-        Debug.Log("bladeDamage: " + bladeDamage);
-        Debug.Log("bladeRotationSpeedDeg: " + bladeRotationSpeedDeg);
+    public void AddDashUpgrade(float durationSec, float damage, float speed)
+    {
+        dashDurationSec += durationSec;
+        dashDamage += damage;
+        dashSpeed += speed;
+    }
+
+    public void AddBoomerangUpgrade(float damage, float maxDistance, float speed)
+    {
+        boomerangDamage += damage;
+        boomerangMaxDistance += maxDistance;
+        boomerangSpeed += speed;
     }
 }

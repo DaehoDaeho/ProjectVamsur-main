@@ -11,6 +11,8 @@ public class DashDamagePulse : MonoBehaviour
 
     [SerializeField] private int bufferSize = 32;
 
+    [SerializeField] private PlayerWeaponStatsRuntime stats;
+
     private Collider2D[] results;
     private Dictionary<Transform, float> lastHitTimeByTarget = new Dictionary<Transform, float>();
 
@@ -55,12 +57,19 @@ public class DashDamagePulse : MonoBehaviour
 
     void ApplyPulseDamage()
     {
+        if(stats == null)
+        {
+            return;
+        }
+
         results = Physics2D.OverlapCircleAll(transform.position, radius, enemyLayer);
 
         if(results == null || results.Length == 0)
         {
             return;
         }
+
+        damage = stats.GetDashDamage();
 
         float now = Time.time;
 

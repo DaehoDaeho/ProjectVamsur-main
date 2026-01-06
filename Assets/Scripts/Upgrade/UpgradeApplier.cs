@@ -67,6 +67,16 @@ public static class UpgradeApplier
             float bladeDamageDelta = def.GetBladeDamageDelta();
             float bladeRotationSpeedDelta = def.GetBladeRotationSpeedDegDelta();
             stats.AddOrbitBladesUpgrade(bladeCountDelta, bladeDamageDelta, bladeRotationSpeedDelta);
+
+            float dashDurationSec = def.GetDashDurationSec();
+            float dashDamage = def.GetDashDamage();
+            float dashSpeed = def.GetDashSpeed();
+            stats.AddDashUpgrade(dashDurationSec, dashDamage, dashSpeed);
+
+            float boomerangDamage = def.GetBoomerangDamage();
+            float boomerangMaxDistance = def.GetBoomerangMaxDistance();
+            float boomerangSpeed = def.GetBoomerangSpeed();
+            stats.AddBoomerangUpgrade(boomerangDamage, boomerangMaxDistance, boomerangSpeed);
         }
     }
 }

@@ -57,23 +57,6 @@ public class LevelUpDraftUI : MonoBehaviour
             playerExperience.OnLevelUp += HandleLevelUp;
         }
 
-        if (optionButtons != null)
-        {
-            for (int i = 0; i < optionButtons.Length; ++i)
-            {
-                int idx = i;
-                optionButtons[i].onClick.AddListener(() =>
-                {
-                    OnOptionClicked(idx);
-                });
-            }
-        }
-
-        if (rerollButton != null)
-        {
-            rerollButton.onClick.AddListener(OnRerollClicked);
-        }
-
         Hide();
         UpdateRerollLabel();
     }

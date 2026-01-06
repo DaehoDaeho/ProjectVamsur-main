@@ -35,6 +35,9 @@ public class BoomerangWeapon : MonoBehaviour
     [SerializeField]
     private float spreadDeg = 16.0f;    // 발사 방향의 퍼짐 각도.
 
+    [SerializeField]
+    private PlayerWeaponStatsRuntime stats;
+
     private float attackTimer;
 
     private void Reset()
@@ -125,6 +128,11 @@ public class BoomerangWeapon : MonoBehaviour
 
     void SpawnOne(Vector2 dir)
     {
+        if(stats == null)
+        {
+            return;
+        }
+
         Vector3 spawnPos = owner.position;
 
         GameObject obj = Instantiate(boomerangPrefab, spawnPos, Quaternion.identity);
@@ -139,6 +147,10 @@ public class BoomerangWeapon : MonoBehaviour
             Destroy(obj);
             return;
         }
+
+        damage = stats.GetBoomerangDamage();
+        maxDistance = stats.GetBoomerangMaxDistance();
+        projectileSpeed = stats.GetBoomerangSpeed();
 
         proj.Setup(owner, dir, projectileSpeed, damage, maxDistance, hitCooldownSec, enemyLayer);
     }

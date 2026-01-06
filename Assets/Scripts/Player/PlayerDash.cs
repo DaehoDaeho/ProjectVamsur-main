@@ -43,6 +43,9 @@ public class PlayerDash : MonoBehaviour
     [SerializeField]
     private float afterImageEndAlpha = 0.0f;
 
+    [SerializeField]
+    private PlayerWeaponStatsRuntime stats;
+
 
     private bool isDashing;
     private float dashEndTime;
@@ -84,7 +87,12 @@ public class PlayerDash : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isDashing == false)
+        if (stats == null)
+        {
+            return;
+        }
+
+        if (isDashing == false)
         {
             return;
         }
@@ -93,6 +101,8 @@ public class PlayerDash : MonoBehaviour
         {
             EndDash();
         }
+
+        dashSpeed = stats.GetDashSpeed();
 
         if(body != null)
         {
@@ -104,6 +114,13 @@ public class PlayerDash : MonoBehaviour
 
     void StartDash()
     {
+        if(stats == null)
+        {
+            return;
+        }
+
+        dashDurationSec = stats.GetDashDurationSec();
+
         isDashing = true;
 
         dashEndTime = Time.time + dashDurationSec;
@@ -115,6 +132,8 @@ public class PlayerDash : MonoBehaviour
         {
             movementScriptToDisable.enabled = false;
         }
+
+        dashSpeed = stats.GetDashSpeed();
 
         if(body != null)
         {

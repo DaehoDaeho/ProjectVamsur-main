@@ -70,6 +70,24 @@ public class UpgradeDefinition : ScriptableObject
     [SerializeField]
     private float bladeRotationSpeedDegDelta = 0.0f;
 
+    [SerializeField]
+    private float dashDurationSec = 0.0f;
+
+    [SerializeField]
+    private float dashDamage = 0.0f;
+
+    [SerializeField]
+    private float dashSpeed = 0.0f;
+
+    [SerializeField]
+    private float boomerangDamage = 0.0f;
+
+    [SerializeField]
+    private float boomerangMaxDistance = 0.0f;
+
+    [SerializeField]
+    private float boomerangSpeed = 0.0f;
+
     // ----- Getterµé -----
 
     public string GetId()
@@ -160,5 +178,35 @@ public class UpgradeDefinition : ScriptableObject
     public float GetBladeRotationSpeedDegDelta()
     {
         return bladeRotationSpeedDegDelta;
+    }
+
+    public float GetDashDurationSec()
+    {
+        return dashDurationSec;
+    }
+
+    public float GetDashDamage()
+    {
+        return dashDamage;
+    }
+
+    public float GetDashSpeed()
+    {
+        return dashSpeed;
+    }
+
+    public float GetBoomerangDamage()
+    {
+        return boomerangDamage;
+    }
+
+    public float GetBoomerangMaxDistance()
+    {
+        return boomerangMaxDistance;
+    }
+
+    public float GetBoomerangSpeed()
+    {
+        return boomerangSpeed;
     }
 }
